@@ -320,6 +320,15 @@ body {
 .picks .on { color: var(--gold); }
 .picks .off { opacity: 0.25; }
 
+.make-badge {
+  color: var(--gold);
+  border: 1px dashed var(--gold);
+  border-radius: 3px;
+  padding: 1px 8px;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+
 .empty-note {
   color: var(--faint);
   padding: 24px 0 72px;
@@ -431,6 +440,48 @@ body {
 
 .idea dt { color: var(--faint); }
 .idea dd { margin: 0; color: var(--text); }
+
+.sourcing {
+  border: 1px dashed var(--gold);
+  border-radius: 6px;
+  padding: 16px 18px;
+  background: var(--gold-soft);
+}
+
+.src-facts {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 14px;
+  margin: 12px 0 0;
+  font-size: 0.84rem;
+}
+
+.src-facts dt { color: var(--faint); white-space: nowrap; }
+.src-facts dd { margin: 0; color: var(--text); }
+
+.kw {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.74rem;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 1px 6px;
+  background: var(--surface);
+  display: inline-block;
+  margin: 1px 2px 1px 0;
+}
+
+.m-section .src-regs-label {
+  margin: 14px 0 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-sub);
+}
+
+.m-section .src-note {
+  margin-top: 10px;
+  font-size: 0.74rem;
+  color: var(--faint);
+}
 
 .caveats { margin: 0; padding: 0; list-style: none; }
 

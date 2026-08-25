@@ -35,9 +35,18 @@ Claude Code のセッションで「US1234567 を追加して」と頼めば、�
   ],
   "difficulty": 3,                  // 採掘難易度 1(週末で試せる)〜5(資本と年単位が要る)
   "capital": "低（〜50万円）など目安",
-  "caveats": ["注意点。商標・後続特許・規制など最低2つ"]
+  "caveats": ["注意点。商標・後続特許・規制など最低2つ"],
+  "sourcing": {                     // 任意。海外量産できるモノ系のみ。付けると「⚑ 量産ルート」バッジが出る
+    "route": "どこでどう作るか（Alibaba/1688、OEM、金型の要否など）",
+    "unit_cost": "FOB単価の目安（あくまで相場観、要見積もり明記）",
+    "moq": "最小ロットの目安",
+    "keywords": ["Alibaba等で使う検索ワード"],
+    "regs": ["輸入・販売時の規制/認証（ST・PSE・技適・食品衛生・PL保険など）"]
+  }
 }
 ```
+
+category は現在 `tech / commerce / food / pet / mobility / hardware / goods / toy` を使用中（新設可）。
 
 ## 生成の原則
 

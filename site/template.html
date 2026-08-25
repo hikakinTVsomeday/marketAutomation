@@ -83,7 +83,7 @@ function picks(n) {
 function buildControls() {
   const cats = new Map();
   for (const e of ENTRIES) cats.set(e.idea.category, e.idea.category_label);
-  const frag = [["all", "すべて"], ...cats]
+  const frag = [["all", "すべて"], ...cats, ["_make", "⚑ 海外量産むき"]]
     .map(([key, label]) =>
       `<button class="chip" data-cat="${esc(key)}" aria-pressed="${key === "all"}">${esc(label)}</button>`)
     .join("");
@@ -115,14 +115,36 @@ function cardHTML(e, i) {
       ${picks(idea.difficulty)}
       <span>${esc(year)}年失効</span>
       <span>アイデア ${idea.ideas.length}</span>
+      ${idea.sourcing ? '<span class="make-badge">⚑ 量産ルート</span>' : ""}
     </div>
   </article>`;
 }
 
 function render() {
-  const list = ENTRIES.filter((e) => activeCat === "all" || e.idea.category === activeCat);
+  const list = ENTRIES.filter((e) =>
+    activeCat === "_make" ? Boolean(e.idea.sourcing)
+      : activeCat === "all" || e.idea.category === activeCat);
   grid.innerHTML = list.map((e) => cardHTML(e, ENTRIES.indexOf(e))).join("");
   emptyNote.hidden = list.length > 0;
+}
+
+function sourcingHTML(s) {
+  if (!s) return "";
+  const kws = (s.keywords || []).map((k) => `<code class="kw">${esc(k)}</code>`).join(" ");
+  const regs = (s.regs || []).map((r) => `<li>${esc(r)}</li>`).join("");
+  return `
+    <div class="m-section sourcing">
+      <p class="m-label">MAKE — 海外量産ルート</p>
+      <p>${esc(s.route)}</p>
+      <dl class="src-facts">
+        <dt>単価目安</dt><dd>${esc(s.unit_cost)}</dd>
+        <dt>ロット目安</dt><dd>${esc(s.moq)}</dd>
+        <dt>探し方</dt><dd>${kws}</dd>
+      </dl>
+      <p class="src-regs-label">輸入・販売時にクリアすること</p>
+      <ul class="caveats">${regs}</ul>
+      <p class="src-note">※単価・ロットは相場の目安。実際は必ず複数工場から見積もりを。</p>
+    </div>`;
 }
 
 function modalHTML(e) {
@@ -148,6 +170,7 @@ function modalHTML(e) {
     <div class="m-section"><p class="m-label">WHY GOLD — なぜ今おいしい？</p><p>${esc(idea.why_gold)}</p></div>
     <div class="m-section"><p class="m-label">STORY — 背景</p><p>${esc(idea.story)}</p></div>
     <div class="m-section"><p class="m-label">IDEAS — ビジネスアイデア</p>${ideas}</div>
+    ${sourcingHTML(idea.sourcing)}
     <div class="m-section"><p class="m-label">CAUTION — 注意ポイント</p><ul class="caveats">${caveats}</ul></div>
     <dl class="facts">
       <dt>title</dt><dd>${esc(patent.title)}</dd>
