@@ -1,0 +1,498 @@
+/* 特許鉱山 — blueprint-dark first, 公報紙 light */
+
+:root {
+  --bg: #0F1A2E;
+  --bg-deep: #0B1424;
+  --surface: #16233B;
+  --surface-2: #1C2C49;
+  --text: #EAE4D4;
+  --text-sub: #A7B0C4;
+  --faint: #6E7A93;
+  --line: #2A3B5A;
+  --grid-line: rgba(234, 228, 212, 0.055);
+  --gold: #D9A544;
+  --gold-soft: rgba(217, 165, 68, 0.14);
+  --stamp: #D8584A;
+  --stamp-soft: rgba(216, 88, 74, 0.12);
+  --shadow: rgba(0, 0, 0, 0.4);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #F4F1E7;
+    --bg-deep: #ECE7D8;
+    --surface: #FCFAF2;
+    --surface-2: #F6F2E5;
+    --text: #22304A;
+    --text-sub: #56617A;
+    --faint: #8B94A8;
+    --line: #D8D1BC;
+    --grid-line: rgba(34, 48, 74, 0.06);
+    --gold: #9C7418;
+    --gold-soft: rgba(156, 116, 24, 0.12);
+    --stamp: #B23E33;
+    --stamp-soft: rgba(178, 62, 51, 0.10);
+    --shadow: rgba(60, 50, 20, 0.12);
+  }
+}
+
+:root[data-theme="light"] {
+  --bg: #F4F1E7;
+  --bg-deep: #ECE7D8;
+  --surface: #FCFAF2;
+  --surface-2: #F6F2E5;
+  --text: #22304A;
+  --text-sub: #56617A;
+  --faint: #8B94A8;
+  --line: #D8D1BC;
+  --grid-line: rgba(34, 48, 74, 0.06);
+  --gold: #9C7418;
+  --gold-soft: rgba(156, 116, 24, 0.12);
+  --stamp: #B23E33;
+  --stamp-soft: rgba(178, 62, 51, 0.10);
+  --shadow: rgba(60, 50, 20, 0.12);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+.mono {
+  font-family: "IBM Plex Mono", "Menlo", "Consolas", monospace;
+}
+
+.wrap {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---- masthead ---- */
+
+.masthead {
+  background:
+    repeating-linear-gradient(0deg, var(--grid-line) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px 28px),
+    var(--bg-deep);
+  border-bottom: 1px solid var(--line);
+  padding: 64px 0 44px;
+}
+
+.eyebrow {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 14px;
+}
+
+.masthead h1 {
+  font-family: "Shippori Mincho", "Hiragino Mincho ProN", serif;
+  font-weight: 800;
+  font-size: clamp(2.6rem, 7vw, 4.2rem);
+  line-height: 1.15;
+  margin: 0 0 18px;
+  letter-spacing: 0.04em;
+  text-wrap: balance;
+}
+
+.masthead h1 .pick { color: var(--gold); }
+
+.tagline {
+  max-width: 34em;
+  color: var(--text-sub);
+  margin: 0 0 26px;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78rem;
+  color: var(--faint);
+  letter-spacing: 0.06em;
+}
+
+.stats strong {
+  color: var(--text);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- intro steps ---- */
+
+.intro {
+  padding: 44px 0 8px;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.steps li {
+  counter-increment: step;
+  border-top: 2px solid var(--line);
+  padding-top: 14px;
+}
+
+.steps li::before {
+  content: "第" counter(step) "条";
+  display: block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.steps h2 {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 700;
+  font-size: 1.08rem;
+  margin: 0 0 6px;
+  letter-spacing: 0.02em;
+}
+
+.steps p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text-sub);
+}
+
+/* ---- controls ---- */
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 34px 0 20px;
+}
+
+.controls .label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: var(--faint);
+  margin-right: 6px;
+}
+
+.chip {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--text-sub);
+  font-family: inherit;
+  font-size: 0.82rem;
+  padding: 5px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.chip:hover { border-color: var(--gold); color: var(--text); }
+
+.chip[aria-pressed="true"] {
+  border-color: var(--gold);
+  background: var(--gold-soft);
+  color: var(--text);
+}
+
+.chip:focus-visible,
+.card:focus-visible,
+.modal-close:focus-visible,
+.patent-link:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ---- card grid ---- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 18px;
+  padding-bottom: 72px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 20px 20px 16px;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+  background: var(--surface-2);
+}
+
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.card-no {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.74rem;
+  color: var(--faint);
+  letter-spacing: 0.05em;
+}
+
+.stamp {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  padding: 3px 6px 3px 9px;
+  color: var(--stamp);
+  border: 1.5px solid var(--stamp);
+  border-radius: 3px;
+  background: var(--stamp-soft);
+  transform: rotate(-4deg);
+  white-space: nowrap;
+}
+
+.card h3 {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 700;
+  font-size: 1.24rem;
+  line-height: 1.45;
+  margin: 0;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+
+.card .one-liner {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-sub);
+  flex-grow: 1;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  border-top: 1px dashed var(--line);
+  padding-top: 12px;
+  font-size: 0.78rem;
+  color: var(--faint);
+}
+
+.cat-chip {
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  border-radius: 999px;
+  padding: 1px 10px;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+}
+
+.picks { letter-spacing: 0.1em; }
+.picks .on { color: var(--gold); }
+.picks .off { opacity: 0.25; }
+
+.empty-note {
+  color: var(--faint);
+  padding: 24px 0 72px;
+  font-size: 0.9rem;
+}
+
+/* ---- modal ---- */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: color-mix(in srgb, var(--bg-deep) 82%, transparent);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 4vh 16px;
+  overflow-y: auto;
+  z-index: 50;
+}
+
+.overlay[hidden] { display: none; }
+
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  max-width: 720px;
+  width: 100%;
+  padding: 34px clamp(20px, 5vw, 44px) 40px;
+  box-shadow: 0 24px 60px var(--shadow);
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  appearance: none;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--text-sub);
+  border-radius: 999px;
+  width: 34px;
+  height: 34px;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal-close:hover { border-color: var(--stamp); color: var(--stamp); }
+
+.modal-head { margin-bottom: 22px; padding-right: 36px; }
+
+.modal-head .card-no { display: block; margin-bottom: 8px; }
+
+.modal-head h2 {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 800;
+  font-size: clamp(1.4rem, 4vw, 1.8rem);
+  line-height: 1.4;
+  margin: 0 0 8px;
+  text-wrap: balance;
+}
+
+.modal-head .sub {
+  margin: 0;
+  color: var(--text-sub);
+  font-size: 0.9rem;
+}
+
+.m-section { margin-top: 26px; }
+
+.m-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  margin: 0 0 8px;
+}
+
+.m-section p { margin: 0; font-size: 0.94rem; }
+
+.idea {
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  border-radius: 4px;
+  padding: 14px 16px;
+  margin-top: 12px;
+  background: var(--surface-2);
+}
+
+.idea h4 {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 700;
+  font-size: 1.02rem;
+  margin: 0 0 6px;
+}
+
+.idea p { margin: 0 0 8px; font-size: 0.88rem; color: var(--text-sub); }
+
+.idea dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 12px;
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.idea dt { color: var(--faint); }
+.idea dd { margin: 0; color: var(--text); }
+
+.caveats { margin: 0; padding: 0; list-style: none; }
+
+.caveats li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 0.88rem;
+  color: var(--text-sub);
+  margin-bottom: 6px;
+}
+
+.caveats li::before {
+  content: "※";
+  position: absolute;
+  left: 0;
+  color: var(--stamp);
+}
+
+.facts {
+  margin-top: 26px;
+  border-top: 1px dashed var(--line);
+  padding-top: 18px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 16px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.76rem;
+}
+
+.facts dt { color: var(--faint); }
+.facts dd { margin: 0; color: var(--text-sub); overflow-wrap: anywhere; }
+
+.patent-link {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 0.86rem;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  padding: 8px 18px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.patent-link:hover { background: var(--gold-soft); }
+
+/* ---- footer ---- */
+
+footer {
+  border-top: 1px solid var(--line);
+  background: var(--bg-deep);
+  padding: 36px 0 48px;
+  font-size: 0.8rem;
+  color: var(--faint);
+}
+
+footer p { margin: 0 0 10px; max-width: 46em; }
+
+footer .mono { font-size: 0.72rem; letter-spacing: 0.08em; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .card, .chip, .patent-link { transition: none; }
+  .card:hover { transform: none; }
+}

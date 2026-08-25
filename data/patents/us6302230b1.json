@@ -1,0 +1,16 @@
+{
+  "id": "us6302230b1",
+  "number": "US6302230B1",
+  "url": "https://patents.google.com/patent/US6302230B1/en",
+  "title": "Personal mobility vehicles and methods",
+  "filing_date": "1999-06-04",
+  "grant_date": "2001-10-16",
+  "status": "Expired - Lifetime",
+  "expiration_date": "2019-06-04",
+  "inventors": ["Dean L. Kamen", "Robert R. Ambrogi", "Robert J. Duggan", "J. Douglas Field", "Richard Kurt Heinzmann", "Burl Amesbury", "Christopher C. Langenfeld"],
+  "original_assignee": "Deka Products LP",
+  "abstract": "An automatically balancing vehicle having a headroom monitor. The headroom monitor determines the difference between the maximum velocity of the vehicle and the present velocity of the vehicle. An alarm receives a signal from the headroom monitor and produces a warning when the headroom falls below a specified limit.",
+  "gist": "The invention describes self-balancing personal transport devices (the Segway) with motorized ground-contact members that maintain stability dynamically rather than statically. Users stand on a platform while the control system automatically balances by adjusting motor-driven wheels.",
+  "fetched_at": "2026-08-25",
+  "source": "Google Patents via WebFetch"
+}

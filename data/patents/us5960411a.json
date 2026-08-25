@@ -1,0 +1,16 @@
+{
+  "id": "us5960411a",
+  "number": "US5960411A",
+  "url": "https://patents.google.com/patent/US5960411A/en",
+  "title": "Method and system for placing a purchase order via a communications network",
+  "filing_date": "1997-09-12",
+  "grant_date": "1999-09-28",
+  "status": "Expired - Lifetime",
+  "expiration_date": "2017-09-12",
+  "inventors": ["Peri Hartman", "Jeffrey P. Bezos", "Shel Kaphan", "Joel Spiegel"],
+  "original_assignee": "Amazon.com Inc",
+  "abstract": "A method and system for placing an order to purchase an item via the Internet where a purchaser at a client system sends purchaser information to a server system. The server assigns a client identifier, associates it with purchaser details, and sends an HTML document with an order button. Upon button selection, the client sends a purchase request using the stored identifier, allowing the server to combine stored purchaser information with item details to complete the order without retransmitting sensitive data.",
+  "gist": "This patent describes a single-action ordering system that enables customers to purchase items with minimal interactions. After initial registration, customers can order by performing one action (like clicking a button), with the server automatically retrieving stored billing and shipping information.",
+  "fetched_at": "2026-08-25",
+  "source": "Google Patents via WebFetch"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "us6285999b1",
+  "number": "US6285999B1",
+  "url": "https://patents.google.com/patent/US6285999B1/en",
+  "title": "Method for node ranking in a linked database",
+  "filing_date": "1998-01-09",
+  "grant_date": "2001-09-04",
+  "status": "Expired - Lifetime",
+  "expiration_date": "2018-01-09",
+  "inventors": ["Lawrence Page"],
+  "original_assignee": "Leland Stanford Junior University",
+  "abstract": "A method assigns importance ranks to nodes in a linked database, such as any database of documents containing citations, the world wide web or any other hypermedia database. The rank assigned to a document is calculated from the ranks of documents citing it. In addition, the rank of a document is calculated from a constant representing the probability that a browser through the database will randomly jump to the document. The method is particularly useful in enhancing the performance of search engine results for hypermedia databases, such as the world wide web, whose documents have a large variation in quality.",
+  "gist": "This patent describes PageRank, an algorithm that ranks web pages based on the quality and quantity of links pointing to them. A page's importance depends not just on how many pages link to it, but on the importance of those linking pages themselves. The method uses iterative calculations modeling random web surfing behavior to assign numerical ranks that reflect document significance.",
+  "fetched_at": "2026-08-25",
+  "source": "Google Patents via WebFetch"
+}

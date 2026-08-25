@@ -1,0 +1,196 @@
+<title>特許鉱山</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/*__STYLE__*/
+</style>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Expired Patents → Business Ideas</p>
+    <h1>特許<span class="pick">鉱山</span></h1>
+    <p class="tagline">期限が切れて誰でも自由に使えるようになった特許を、読める言葉とビジネスアイデアに掘り起こすカタログ。</p>
+    <div class="stats">
+      <span>収録 <strong id="stat-count">–</strong> 件</span>
+      <span>全件 <strong>失効確認済み</strong></span>
+      <span>出典 <strong>Google Patents</strong></span>
+    </div>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <ol class="steps">
+      <li>
+        <h2>特許は約20年で切れる</h2>
+        <p>米国特許は原則、出願から20年で満了します。維持費の未納で早く消えるものも。切れた技術は、誰でも自由に使える人類の共有財産です。</p>
+      </li>
+      <li>
+        <h2>でも特許文書は読めない</h2>
+        <p>特許は「真似されないため」の文章であって、事業のヒント集ではありません。宝が埋まっていても、地図が暗号で書かれている状態です。</p>
+      </li>
+      <li>
+        <h2>だからAIが翻訳した</h2>
+        <p>このサイトはAIが特許原文を読み、「何がすごいのか」「どう商売にできるか」というアイデアの言葉に翻訳した採掘記録です。</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<main class="wrap">
+  <div class="controls" id="controls" role="group" aria-label="カテゴリで絞り込み">
+    <span class="label">MINE MAP</span>
+  </div>
+  <div class="grid" id="grid"></div>
+  <p class="empty-note" id="empty-note" hidden>このカテゴリの鉱脈はまだ採掘されていません。</p>
+</main>
+
+<div class="overlay" id="overlay" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" id="modal"></div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>本サイトは趣味の採掘プロジェクトであり、法的助言ではありません。米国での失効は米国での話です。実施の前には、対応する日本特許・関連特許・商標・意匠の状態を必ず確認し、判断は弁理士へ相談してください。</p>
+    <p>特許データは Google Patents より取得し、解説とビジネスアイデアは AI（Claude）が生成しています。</p>
+    <p class="mono">PATENT MINE — dig where the fences have fallen.</p>
+  </div>
+</footer>
+
+<script>
+const ENTRIES = /*__DATA__*/[];
+
+const grid = document.getElementById("grid");
+const controls = document.getElementById("controls");
+const emptyNote = document.getElementById("empty-note");
+const overlay = document.getElementById("overlay");
+const modal = document.getElementById("modal");
+document.getElementById("stat-count").textContent = ENTRIES.length;
+
+let activeCat = "all";
+let lastFocused = null;
+
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({
+  "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+}[c]));
+
+function picks(n) {
+  let html = "";
+  for (let i = 1; i <= 5; i++) html += `<span class="${i <= n ? "on" : "off"}">⛏</span>`;
+  return `<span class="picks" title="採掘難易度 ${n}/5" aria-label="採掘難易度 ${n}/5">${html}</span>`;
+}
+
+function buildControls() {
+  const cats = new Map();
+  for (const e of ENTRIES) cats.set(e.idea.category, e.idea.category_label);
+  const frag = [["all", "すべて"], ...cats]
+    .map(([key, label]) =>
+      `<button class="chip" data-cat="${esc(key)}" aria-pressed="${key === "all"}">${esc(label)}</button>`)
+    .join("");
+  controls.insertAdjacentHTML("beforeend", frag);
+  controls.addEventListener("click", (ev) => {
+    const btn = ev.target.closest(".chip");
+    if (!btn) return;
+    activeCat = btn.dataset.cat;
+    controls.querySelectorAll(".chip").forEach((c) =>
+      c.setAttribute("aria-pressed", String(c === btn)));
+    render();
+  });
+}
+
+function cardHTML(e, i) {
+  const { idea, patent } = e;
+  const year = (patent.expiration_date || "").slice(0, 4);
+  return `
+  <article class="card" tabindex="0" role="button" data-id="${esc(patent.id)}"
+    aria-label="${esc(idea.catch)} — 詳しく見る">
+    <div class="card-top">
+      <span class="card-no mono">No.${String(i + 1).padStart(3, "0")}<br>${esc(patent.number)}</span>
+      <span class="stamp" aria-label="期限切れ">失効</span>
+    </div>
+    <h3>${esc(idea.catch)}</h3>
+    <p class="one-liner">${esc(idea.one_liner)}</p>
+    <div class="card-meta">
+      <span class="cat-chip">${esc(idea.category_label)}</span>
+      ${picks(idea.difficulty)}
+      <span>${esc(year)}年失効</span>
+      <span>アイデア ${idea.ideas.length}</span>
+    </div>
+  </article>`;
+}
+
+function render() {
+  const list = ENTRIES.filter((e) => activeCat === "all" || e.idea.category === activeCat);
+  grid.innerHTML = list.map((e) => cardHTML(e, ENTRIES.indexOf(e))).join("");
+  emptyNote.hidden = list.length > 0;
+}
+
+function modalHTML(e) {
+  const { idea, patent } = e;
+  const ideas = idea.ideas.map((it) => `
+    <div class="idea">
+      <h4>${esc(it.title)}</h4>
+      <p>${esc(it.desc)}</p>
+      <dl>
+        <dt>ターゲット</dt><dd>${esc(it.target)}</dd>
+        <dt>収益モデル</dt><dd>${esc(it.revenue)}</dd>
+      </dl>
+    </div>`).join("");
+  const caveats = idea.caveats.map((c) => `<li>${esc(c)}</li>`).join("");
+  return `
+    <button class="modal-close" aria-label="閉じる">✕</button>
+    <div class="modal-head">
+      <span class="card-no mono">${esc(patent.number)} ・ ${esc(idea.category_label)} ・ 採掘難易度 ${idea.difficulty}/5 ・ 初期投資 ${esc(idea.capital)}</span>
+      <h2 id="modal-title">${esc(idea.catch)}</h2>
+      <p class="sub">${esc(idea.title_ja)}</p>
+    </div>
+    <div class="m-section"><p class="m-label">WHAT — これは何の特許？</p><p>${esc(idea.plain)}</p></div>
+    <div class="m-section"><p class="m-label">WHY GOLD — なぜ今おいしい？</p><p>${esc(idea.why_gold)}</p></div>
+    <div class="m-section"><p class="m-label">STORY — 背景</p><p>${esc(idea.story)}</p></div>
+    <div class="m-section"><p class="m-label">IDEAS — ビジネスアイデア</p>${ideas}</div>
+    <div class="m-section"><p class="m-label">CAUTION — 注意ポイント</p><ul class="caveats">${caveats}</ul></div>
+    <dl class="facts">
+      <dt>title</dt><dd>${esc(patent.title)}</dd>
+      <dt>inventor</dt><dd>${esc(patent.inventors.join(", "))}</dd>
+      <dt>assignee</dt><dd>${esc(patent.original_assignee)}</dd>
+      <dt>filed</dt><dd>${esc(patent.filing_date)}</dd>
+      <dt>expired</dt><dd>${esc(patent.expiration_date)} (${esc(patent.status)})</dd>
+    </dl>
+    <a class="patent-link" href="${esc(patent.url)}" target="_blank" rel="noopener">原文を読む（Google Patents）→</a>`;
+}
+
+function openModal(id) {
+  const e = ENTRIES.find((x) => x.patent.id === id);
+  if (!e) return;
+  lastFocused = document.activeElement;
+  modal.innerHTML = modalHTML(e);
+  overlay.hidden = false;
+  document.body.style.overflow = "hidden";
+  modal.querySelector(".modal-close").focus();
+}
+
+function closeModal() {
+  overlay.hidden = true;
+  document.body.style.overflow = "";
+  if (lastFocused) lastFocused.focus();
+}
+
+grid.addEventListener("click", (ev) => {
+  const card = ev.target.closest(".card");
+  if (card) openModal(card.dataset.id);
+});
+grid.addEventListener("keydown", (ev) => {
+  if (ev.key !== "Enter" && ev.key !== " ") return;
+  const card = ev.target.closest(".card");
+  if (card) { ev.preventDefault(); openModal(card.dataset.id); }
+});
+overlay.addEventListener("click", (ev) => {
+  if (ev.target === overlay || ev.target.closest(".modal-close")) closeModal();
+});
+document.addEventListener("keydown", (ev) => {
+  if (ev.key === "Escape" && !overlay.hidden) closeModal();
+});
+
+buildControls();
+render();
+</script>

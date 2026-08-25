@@ -1,0 +1,16 @@
+{
+  "id": "us4558302a",
+  "number": "US4558302A",
+  "url": "https://patents.google.com/patent/US4558302A/en",
+  "title": "High speed data compression and decompression apparatus and method",
+  "filing_date": "1983-06-20",
+  "grant_date": "1985-12-10",
+  "status": "Expired - Lifetime",
+  "expiration_date": "2003-06-20",
+  "inventors": ["Terry A. Welch"],
+  "original_assignee": "Sperry Corp",
+  "abstract": "A data compression system that encodes input character streams into compressed code signals and decodes them back to original data. The system stores recognized strings and searches input data to find longest matches with previously stored strings. Each matched string is extended by the next character and stored with an assigned code. The decompressor reconstructs character strings using received codes and extension characters, building a matching string table to recover the original data.",
+  "gist": "This patent describes LZW, an adaptive data compression technique that parses input data into increasingly longer character sequences, assigning unique codes to each sequence. When a sequence is encountered again, the system outputs its code rather than the full sequence, achieving compression.",
+  "fetched_at": "2026-08-25",
+  "source": "Google Patents via WebFetch"
+}
