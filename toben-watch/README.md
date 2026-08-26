@@ -12,13 +12,16 @@
 サイトは「一覧 → 答弁の逐条評価 → 提出者／答弁者ページ」の3層構成で、
 提出者・答弁者ごとに平均スコア・判定分布・頻出回避パターンを集計表示します。
 
-収録サンプル（3件）:
+収録サンプル（6件）:
 
 | 件名 | 提出者 | 答弁者 | 評価 |
 |---|---|---|---|
 | [予定納税制度の廃止又は見直し](https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/214/meisai/m214014.htm)（参・214回14号） | 浜田聡 | 石破茂 | **C（52）** 数字は出したが核心は77年前の答弁の引用 |
 | [日ロ平和条約交渉と日米安保条約の関係](https://www.shugiin.go.jp/internet/itdb_shitsumon.nsf/html/shitsumon/198099.htm)（衆・198回99号） | 初鹿明博 | 安倍晋三 | **E（8）** 北方領土への米軍基地設置拒否権限を問う4問を一文で回答拒否 |
 | [政府委員の政策提言と利益誘導の可能性](https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/217/meisai/m217132.htm)（参・217回132号） | 浜田聡 | 石破茂 | **D（42）** 「個別判断」と一般論で名指しされた事案には触れず |
+| [「そもそも」の意味として「基本的に」と記載している辞書](https://www.shugiin.go.jp/internet/itdb_shitsumon.nsf/html/shitsumon/193264.htm)（衆・193回264号） | 初鹿明博 | 安倍晋三 | **E（18）** 辞書の伝言ゲームで「基本」を捻出。「調べたのか」には答えず |
+| [内閣総理大臣夫人の法的地位](https://www.shugiin.go.jp/internet/itdb_shitsumon.nsf/html/shitsumon/193105.htm)（衆・193回105号） | 逢坂誠二 | 安倍晋三 | **C（58）** 「私人」閣議決定。炎上したが定義と根拠は示した |
+| [虚偽答弁及び説明拒否発言の連発](https://www.shugiin.go.jp/internet/itdb_shitsumon.nsf/html/shitsumon/204003.htm)（衆・204回3号） | 中谷一馬 | 菅義偉 | **D（34）** 説明拒否を問われ「合理的理由があれば拒否も許される」と回答 |
 
 ## 構成
 
