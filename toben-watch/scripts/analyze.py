@@ -14,6 +14,7 @@
 """
 
 import json
+import re
 import sys
 from datetime import date
 from pathlib import Path
@@ -32,6 +33,7 @@ P5 まとめ答弁型: 複数の設問を一括りにして個別の論点への
 P6 指標すり替え型: 問われた数値・定義と異なるものに断りなく置き換えて答える
 P7 仮定不応答型: 「仮定の質問にはお答えできない」として答えない
 P8 論点スルー型: 質問者が示した論拠・前提に反論も説明もせず結論だけ述べる
+P9 一概困難型: 「個別具体の事情により一概にお答えすることは困難」として基準を示さない
 """.strip()
 
 SYSTEM = f"""あなたは国会の質問主意書と政府答弁書を分析する専門アナリストです。
@@ -183,6 +185,10 @@ def main() -> None:
 
     result = analyze(raw)
     meta = raw.get("meta", {})
+    # 答弁書冒頭の「内閣総理大臣　石破　茂」等から答弁者を拾う
+    m = re.search(r"^(内閣総理大臣)\s*(.+)$", raw["answer_text"], re.M)
+    answerer_title = m.group(1) if m else ""
+    answerer_name = m.group(2).replace("　", "").strip() if m else ""
     record = {
         "id": raw["id"],
         "source": {
@@ -193,6 +199,8 @@ def main() -> None:
             "submitter": meta.get("提出者", "").replace("　", "").removesuffix("君"),
             "submitted_on": meta.get("提出日", ""),
             "answered_on": meta.get("答弁書受領日", ""),
+            "answerer_name": answerer_name,
+            "answerer_title": answerer_title,
             "urls": raw["urls"],
         },
         **result,

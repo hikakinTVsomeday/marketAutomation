@@ -82,7 +82,6 @@
     outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px;
   }
 
-  .mincho { font-family: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif; }
   .mono { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
 
   /* ---- site header ---- */
@@ -92,25 +91,72 @@
     border-bottom: 3px double var(--rule);
   }
   .site-name {
-    font-family: "Shippori Mincho", serif;
+    font-family: "Shippori Mincho", "Hiragino Mincho ProN", serif;
     font-weight: 700; font-size: 1.5rem; letter-spacing: .12em; margin: 0;
   }
+  .site-name a { color: inherit; text-decoration: none; }
   .site-tag { color: var(--ink-soft); font-size: .82rem; letter-spacing: .04em; }
   .proto {
     margin-left: auto; font-size: .7rem; letter-spacing: .14em;
     border: 1px solid var(--rule); color: var(--ink-soft);
     padding: 2px 10px; border-radius: 999px; white-space: nowrap;
   }
+  .crumb { margin: 18px 0 0; font-size: .84rem; }
+
+  /* ---- section label ---- */
+  .sec-label {
+    display: flex; align-items: center; gap: 12px;
+    font-size: .8rem; letter-spacing: .22em; color: var(--ink-soft);
+    margin: 0 0 16px; font-weight: 700;
+  }
+  .sec-label::after { content: ""; flex: 1; border-top: 1px solid var(--rule); }
+
+  /* ---- home ---- */
+  .home-intro { margin: 34px 0 0; font-size: .97rem; max-width: 40em; }
+  .stat-strip {
+    margin: 30px 0 0; display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;
+  }
+  .stat {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 6px;
+    padding: 14px 18px 12px;
+  }
+  .stat .k { font-size: .72rem; letter-spacing: .12em; color: var(--ink-soft); }
+  .stat .v { font-size: 1.55rem; font-weight: 500; line-height: 1.3; }
+  .stat .v small { font-size: .8rem; color: var(--ink-soft); font-weight: 400; }
+
+  .case-list { margin: 40px 0 0; display: grid; gap: 16px; }
+  .case-card {
+    display: block; background: var(--surface); border: 1px solid var(--rule);
+    border-radius: 6px; padding: 18px 22px; color: inherit; text-decoration: none;
+  }
+  .case-card:hover { border-color: var(--accent); }
+  .cc-top { display: flex; gap: 12px; align-items: flex-start; }
+  .cc-eyebrow { font-size: .72rem; letter-spacing: .1em; color: var(--ink-soft); margin: 0 0 4px; }
+  .cc-title {
+    font-family: "Shippori Mincho", serif; font-weight: 600; font-size: 1.06rem;
+    line-height: 1.6; margin: 0; text-wrap: balance;
+  }
+  .cc-grade {
+    margin-left: auto; flex: 0 0 auto;
+    width: 46px; height: 46px; border: 2px solid var(--seal); border-radius: 6px;
+    display: grid; place-items: center; color: var(--seal);
+    font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 1.5rem;
+    rotate: -2deg;
+  }
+  .cc-head { font-size: .87rem; color: var(--ink-soft); margin: 8px 0 0; }
+  .cc-people { font-size: .8rem; color: var(--ink-soft); margin: 10px 0 0; }
+  .cc-people b { color: var(--ink); font-weight: 500; }
 
   /* ---- case header ---- */
-  .case-head { padding: 40px 0 8px; }
+  .case-head { padding: 34px 0 8px; }
   .eyebrow {
     font-size: .74rem; letter-spacing: .18em; color: var(--accent-ink);
     text-transform: uppercase; margin-bottom: 10px;
   }
   h1.case-title {
     font-family: "Shippori Mincho", serif;
-    font-weight: 600; font-size: clamp(1.45rem, 3.4vw, 1.95rem);
+    font-weight: 600; font-size: clamp(1.4rem, 3.4vw, 1.85rem);
     line-height: 1.5; margin: 0 0 22px; text-wrap: balance; letter-spacing: .02em;
   }
   .meta {
@@ -125,12 +171,6 @@
 
   /* ---- tldr ---- */
   .tldr { margin: 40px 0 0; }
-  .sec-label {
-    display: flex; align-items: center; gap: 12px;
-    font-size: .8rem; letter-spacing: .22em; color: var(--ink-soft);
-    margin: 0 0 16px; font-weight: 700;
-  }
-  .sec-label::after { content: ""; flex: 1; border-top: 1px solid var(--rule); }
   .tldr ol { margin: 0; padding: 0; list-style: none; counter-reset: n; display: grid; gap: 10px; }
   .tldr li {
     counter-increment: n; position: relative; padding-left: 40px;
@@ -197,9 +237,7 @@
   /* ---- overview ---- */
   .overview { margin: 44px 0 0; display: grid; gap: 20px; }
   .overview p { margin: 0; font-size: .95rem; }
-  .ov-block h3 {
-    font-family: "Shippori Mincho", serif; font-size: 1rem; margin: 0 0 6px;
-  }
+  .ov-block h3 { font-family: "Shippori Mincho", serif; font-size: 1rem; margin: 0 0 6px; }
 
   /* ---- items ---- */
   .items { margin: 52px 0 0; display: grid; gap: 30px; }
@@ -240,12 +278,9 @@
     font-family: "Shippori Mincho", serif; font-size: .9rem; line-height: 1.9;
     color: var(--ink); border-radius: 0 4px 4px 0;
   }
-  .plain {
-    font-size: .95rem; padding-left: 16px; border-left: 3px solid var(--accent);
-  }
+  .plain { font-size: .95rem; padding-left: 16px; border-left: 3px solid var(--accent); }
   .plain b.lead { font-size: .78rem; letter-spacing: .1em; color: var(--accent-ink); display: block; }
 
-  .patterns { display: flex; flex-wrap: wrap; gap: 8px; }
   .chip {
     font-size: .74rem; letter-spacing: .04em;
     border: 1px solid var(--bad); color: var(--bad);
@@ -258,6 +293,28 @@
     font-size: .9rem;
   }
   .goodpoint b.lead { color: var(--good); font-size: .76rem; letter-spacing: .14em; display: block; margin-bottom: 2px; }
+
+  /* ---- person page ---- */
+  .person-head { padding: 34px 0 8px; }
+  h1.person-name {
+    font-family: "Shippori Mincho", serif; font-weight: 600;
+    font-size: clamp(1.5rem, 3.6vw, 2rem); margin: 0 0 4px; letter-spacing: .06em;
+  }
+  .person-sub { color: var(--ink-soft); font-size: .88rem; margin: 0; }
+  .agg { margin: 34px 0 0; background: var(--surface); border: 1px solid var(--rule);
+    border-radius: 6px; padding: 24px 28px 22px; }
+  .agg-note { font-size: .78rem; color: var(--ink-soft); margin: 4px 0 0; }
+  .dist { margin-top: 22px; display: grid; gap: 8px; }
+  .dist .row { display: grid; grid-template-columns: 11em 1fr 2.2em; gap: 12px; align-items: center; }
+  .dist .bar { height: 7px; background: var(--neutral-soft); border-radius: 4px; overflow: hidden; }
+  .dist .bar i { display: block; height: 100%; border-radius: 4px; }
+  .dist .cnt { font-size: .8rem; text-align: right; }
+  .dist .lbl { font-size: .8rem; color: var(--ink-soft); }
+  .agg h3 { font-size: .78rem; letter-spacing: .16em; color: var(--ink-soft); margin: 26px 0 10px; }
+  .agg h3:first-of-type { margin-top: 22px; }
+  .patt-list { display: grid; gap: 6px; }
+  .patt-list .row { display: flex; gap: 10px; align-items: baseline; font-size: .86rem; }
+  .patt-list .n { color: var(--ink-soft); font-size: .8rem; }
 
   /* ---- question quality / method ---- */
   .qq, .method { margin: 44px 0 0; font-size: .92rem; }
@@ -272,17 +329,18 @@
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .axis .bar i, .resp .bar i { transition: width .6s ease; }
+    .axis .bar i, .resp .bar i, .dist .bar i { transition: width .6s ease; }
   }
   @media (max-width: 560px) {
     .resp { margin-left: 0; width: 100%; }
     .axis { grid-template-columns: 6em 1fr 2.4em; }
+    .dist .row { grid-template-columns: 8.5em 1fr 2.2em; }
   }
 </style>
 
 <div class="wrap">
   <header class="site">
-    <p class="site-name">答弁ウォッチ</p>
+    <p class="site-name"><a href="#/">答弁ウォッチ</a></p>
     <span class="site-tag">国会答弁をAIが読み、評価する</span>
     <span class="proto">PROTOTYPE</span>
   </header>
@@ -296,8 +354,20 @@
   const esc = s => String(s ?? "").replace(/[&<>"']/g,
     c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
-  const VERDICT_COLOR = { answered: "var(--good)", partial: "var(--warn)",
-    evaded: "var(--bad)", refused_with_reason: "var(--neutral-pill)" };
+  const VERDICTS = [
+    ["answered", "回答", "var(--good)"],
+    ["partial", "部分回答", "var(--warn)"],
+    ["evaded", "実質回答なし", "var(--bad)"],
+    ["refused_with_reason", "回答拒否（理由明示）", "var(--neutral-pill)"],
+  ];
+  const VERDICT_COLOR = Object.fromEntries(VERDICTS.map(([k, , c]) => [k, c]));
+
+  const AXES = [
+    ["responsiveness", "回答充足度"],
+    ["specificity", "具体性"],
+    ["evidence", "根拠の提示"],
+    ["clarity", "明瞭さ"],
+  ];
 
   const PATTERN_LEGEND = [
     ["P1 趣旨不明型", "「お尋ねの趣旨が明らかではない」として答えない"],
@@ -308,14 +378,48 @@
     ["P6 指標すり替え型", "問われた数値・定義と異なるものに断りなく置き換えて答える"],
     ["P7 仮定不応答型", "「仮定の質問にはお答えできない」として答えない"],
     ["P8 論点スルー型", "質問者の論拠・前提に反論も説明もせず結論だけ述べる"],
+    ["P9 一概困難型", "「個別具体の事情により一概にお答えすることは困難」として基準を示さない"],
   ];
 
-  function axisRow(a) {
+  const gradeOf = s => s >= 85 ? "A" : s >= 70 ? "B" : s >= 50 ? "C" : s >= 30 ? "D" : "E";
+  const avg = arr => arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
+  const r1 = x => Math.round(x * 10) / 10;
+
+  const personHref = (role, name) => `#/person/${role}/${encodeURIComponent(name)}`;
+  const bySubmitter = name => CASES.filter(c => c.source.submitter === name);
+  const byAnswerer = name => CASES.filter(c => c.source.answerer_name === name);
+
+  /* ---------- shared fragments ---------- */
+
+  function axisRow(label, score) {
     return `<div class="axis">
-      <span class="name">${esc(a.label)}</span>
-      <span class="bar"><i style="width:${a.score}%"></i></span>
-      <span class="val mono">${a.score}</span>
+      <span class="name">${esc(label)}</span>
+      <span class="bar"><i style="width:${score}%"></i></span>
+      <span class="val mono">${r1(score)}</span>
     </div>`;
+  }
+
+  function caseCard(c) {
+    const s = c.source, o = c.overall;
+    return `<a class="case-card" href="#/case/${esc(c.id)}">
+      <div class="cc-top">
+        <div>
+          <p class="cc-eyebrow">${esc(s.house_label)} 第${s.session}回国会 質問第${s.number}号 ・ ${esc(s.answered_on)}答弁</p>
+          <p class="cc-title">${esc(s.title)}</p>
+        </div>
+        <span class="cc-grade" aria-label="総合評価 ${esc(o.grade)}">${esc(o.grade)}</span>
+      </div>
+      <p class="cc-head">${esc(o.headline)}　<span class="mono">${o.score}/100</span></p>
+      <p class="cc-people">提出 <b>${esc(s.submitter)}</b>　／　答弁 <b>${esc(s.answerer_title)} ${esc(s.answerer_name)}</b></p>
+    </a>`;
+  }
+
+  function distRows(entries, total) {
+    return entries.map(([label, count, color]) => `<div class="row">
+      <span class="lbl">${esc(label)}</span>
+      <span class="bar"><i style="width:${total ? count / total * 100 : 0}%;background:${color}"></i></span>
+      <span class="cnt mono">${count}</span>
+    </div>`).join("");
   }
 
   function itemCard(it) {
@@ -345,19 +449,60 @@
     </article>`;
   }
 
-  function render(c) {
+  function siteFooter(extra) {
+    return `${extra ? esc(extra) + "<br>" : ""}
+      本サイトの評価はAIによる試作です。公開された質問・答弁の全文のみに基づき、
+      特定の政党・議員・政府への支持・不支持を意味しません。
+      出典: 参議院・衆議院「質問主意書・答弁書」`;
+  }
+
+  /* ---------- views ---------- */
+
+  function renderHome() {
+    const scores = CASES.map(c => c.overall.score);
+    const nItems = CASES.reduce((n, c) => n + c.items.length, 0);
+    document.getElementById("app").innerHTML = `
+      <p class="home-intro">国会の質問主意書と政府答弁書をAIが読み、
+      「何を聞いたのか」「どう答えたのか」を平易な日本語に翻訳したうえで、
+      答弁が質問に実質的に答えているか（誠実度）を設問ごとに評価します。
+      誠実な回答も、回避もそのまま記録します。</p>
+      <div class="stat-strip">
+        <div class="stat"><span class="k">収録した答弁書</span><br><span class="v mono">${CASES.length}<small> 件</small></span></div>
+        <div class="stat"><span class="k">逐条評価した設問</span><br><span class="v mono">${nItems}<small> 問</small></span></div>
+        <div class="stat"><span class="k">平均誠実度スコア</span><br><span class="v mono">${r1(avg(scores))}<small> /100</small></span></div>
+      </div>
+      <div class="case-list">
+        <h2 class="sec-label" style="margin:24px 0 0">収録答弁</h2>
+        ${CASES.map(caseCard).join("")}
+      </div>
+      <section class="method">
+        <h2 class="sec-label" style="margin-top:44px">評価の方法</h2>
+        <p>評価対象は「答弁が質問に実質的に答えているか」のみで、政策の当否や政治的立場は評価しません。
+        設問ごとに 回答／部分回答／実質回答なし／回答拒否（理由明示）を判定し、
+        回避の手法を次の分類でタグ付けします。質問側の質も同じ基準で評価します。</p>
+        <div class="legend">
+          ${PATTERN_LEGEND.map(([code, txt]) =>
+            `<div class="row"><span class="code">${esc(code)}</span><span>${esc(txt)}</span></div>`).join("")}
+        </div>
+      </section>`;
+    document.getElementById("foot").innerHTML = siteFooter("");
+  }
+
+  function renderCase(c) {
     const s = c.source, o = c.overall;
     document.getElementById("app").innerHTML = `
+      <p class="crumb"><a href="#/">← 一覧へ</a></p>
       <section class="case-head">
         <p class="eyebrow">${esc(s.house_label)} 第${s.session}回国会 質問第${s.number}号</p>
         <h1 class="case-title">${esc(s.title)}</h1>
         <dl class="meta">
-          <div><dt>提出者</dt><dd>${esc(s.submitter)}</dd></div>
+          <div><dt>提出者</dt><dd><a href="${personHref("submitter", s.submitter)}">${esc(s.submitter)}</a></dd></div>
+          <div><dt>答弁者</dt><dd><a href="${personHref("answerer", s.answerer_name)}">${esc(s.answerer_title)} ${esc(s.answerer_name)}</a></dd></div>
           <div><dt>提出日</dt><dd>${esc(s.submitted_on)}</dd></div>
           <div><dt>答弁書受領日</dt><dd>${esc(s.answered_on)}</dd></div>
           <div><dt>分野</dt><dd>${(c.topic_tags || []).map(esc).join("・")}</dd></div>
         </dl>
-        <p class="src-links">原文（参議院サイト）:
+        <p class="src-links">原文（${esc(s.house_label)}サイト）:
           <a href="${esc(s.urls.question)}" target="_blank" rel="noopener">質問本文</a>
           <a href="${esc(s.urls.answer)}" target="_blank" rel="noopener">答弁本文</a>
           <a href="${esc(s.urls.meisai)}" target="_blank" rel="noopener">経過情報</a>
@@ -378,7 +523,7 @@
           </div>
         </div>
         <div class="axes">
-          ${["responsiveness","specificity","evidence","clarity"].map(k => axisRow(o.axes[k])).join("")}
+          ${AXES.map(([k]) => axisRow(o.axes[k].label, o.axes[k].score)).join("")}
         </div>
         <div class="sw">
           <div class="plus"><h3>誠実だった点</h3><ul>${o.strengths.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
@@ -399,7 +544,7 @@
 
       <section>
         <div class="items">
-          <h2 class="sec-label" style="margin:0">逐条評価 — ６つの設問と答弁</h2>
+          <h2 class="sec-label" style="margin:0">逐条評価 — ${c.items.length}つの設問と答弁</h2>
           ${c.items.map(itemCard).join("")}
         </div>
       </section>
@@ -407,23 +552,90 @@
       <section class="qq">
         <h2 class="sec-label">質問の質について</h2>
         <p>${esc(c.question_quality.comment)}（設計評価: <span class="mono">${c.question_quality.score}</span>/100）</p>
-      </section>
-
-      <section class="method">
-        <h2 class="sec-label">評価の方法と限界</h2>
-        <p>評価対象は「答弁が質問に実質的に答えているか」のみで、政策の当否や政治的立場は評価しません。
-        判定は公開された質問・答弁の全文に基づき、AI（Claude）が逐条で行っています。
-        回避パターンは次の分類を用いています。</p>
-        <div class="legend">
-          ${PATTERN_LEGEND.map(([code, txt]) =>
-            `<div class="row"><span class="code">${esc(code)}</span><span>${esc(txt)}</span></div>`).join("")}
-        </div>
       </section>`;
 
     document.getElementById("foot").innerHTML =
       `${esc(c.analysis_note)}<br>
-       出典: 参議院「質問主意書」（<a href="${esc(s.urls.meisai)}" target="_blank" rel="noopener">第${s.session}回国会 質問第${s.number}号</a>）／解析日: ${esc(c.analyzed_at)}`;
+       出典: ${esc(s.house_label)}「質問主意書」（<a href="${esc(s.urls.meisai)}" target="_blank" rel="noopener">第${s.session}回国会 質問第${s.number}号</a>）／解析日: ${esc(c.analyzed_at)}`;
   }
 
-  render(CASES[0]);
+  function renderPerson(role, name) {
+    const isSub = role === "submitter";
+    const cs = isSub ? bySubmitter(name) : byAnswerer(name);
+    if (!cs.length) { renderNotFound(); return; }
+
+    const items = cs.flatMap(c => c.items);
+    const meanScore = avg(cs.map(c => c.overall.score));
+    const meanQQ = avg(cs.map(c => c.question_quality.score));
+    const verdictCounts = VERDICTS.map(([k, label, color]) =>
+      [label, items.filter(it => it.verdict === k).length, color]);
+    const pattCounts = {};
+    for (const it of items) for (const p of it.patterns)
+      pattCounts[p.label] = (pattCounts[p.label] || 0) + 1;
+    const patts = Object.entries(pattCounts).sort((a, b) => b[1] - a[1]);
+    const titles = isSub ? [] : [...new Set(cs.map(c => c.source.answerer_title))];
+
+    const scopeNote = isSub
+      ? "スコア・判定・パターンは、この議員が提出した質問主意書に対する政府答弁の集計です。"
+      : "スコア・判定・パターンは、この答弁者名で受領した答弁書の集計です（答弁書は内閣として閣議決定されたもの）。";
+
+    document.getElementById("app").innerHTML = `
+      <p class="crumb"><a href="#/">← 一覧へ</a></p>
+      <section class="person-head">
+        <p class="eyebrow">${isSub ? "質問提出者" : "答弁者"}${titles.length ? "　" + esc(titles.join("・")) : ""}</p>
+        <h1 class="person-name">${esc(name)}</h1>
+        <p class="person-sub">収録 ${cs.length}件 ・ 逐条評価 ${items.length}問</p>
+      </section>
+
+      <section class="agg">
+        <div class="overall-top">
+          <div class="seal" role="img" aria-label="平均評価 ${gradeOf(meanScore)}">${gradeOf(meanScore)}<small>平均評価</small></div>
+          <div class="overall-main">
+            <p class="headline">${isSub ? "この議員の質問への答弁は" : "この答弁者の答弁は"}、平均 <span class="mono">${r1(meanScore)}</span>/100</p>
+            <p class="agg-note">${esc(scopeNote)}</p>
+          </div>
+        </div>
+        <h3>評価軸の平均</h3>
+        <div class="axes">
+          ${AXES.map(([k, label]) => axisRow(label, avg(cs.map(c => c.overall.axes[k].score)))).join("")}
+        </div>
+        <h3>設問ごとの判定の内訳（${items.length}問）</h3>
+        <div class="dist">${distRows(verdictCounts, items.length)}</div>
+        ${patts.length ? `<h3>使われた回避パターン</h3>
+        <div class="patt-list">
+          ${patts.map(([label, n]) => `<div class="row"><span class="chip">${esc(label)}</span><span class="n mono">×${n}</span></div>`).join("")}
+        </div>` : ""}
+        ${isSub ? `<h3>質問の質（設計評価）の平均</h3>
+        <div class="axes">${axisRow("質問の質", meanQQ)}</div>` : ""}
+      </section>
+
+      <div class="case-list">
+        <h2 class="sec-label" style="margin:40px 0 0">${isSub ? "提出した質問主意書" : "答弁した質問主意書"}</h2>
+        ${cs.map(caseCard).join("")}
+      </div>`;
+    document.getElementById("foot").innerHTML = siteFooter("");
+  }
+
+  function renderNotFound() {
+    document.getElementById("app").innerHTML =
+      `<p class="crumb"><a href="#/">← 一覧へ</a></p><p style="margin-top:30px">ページが見つかりませんでした。</p>`;
+    document.getElementById("foot").innerHTML = siteFooter("");
+  }
+
+  /* ---------- router ---------- */
+
+  function route() {
+    const h = location.hash || "#/";
+    const parts = h.replace(/^#\//, "").split("/").filter(Boolean);
+    if (parts.length === 0) renderHome();
+    else if (parts[0] === "case" && parts[1]) {
+      const c = CASES.find(x => x.id === decodeURIComponent(parts[1]));
+      c ? renderCase(c) : renderNotFound();
+    } else if (parts[0] === "person" && parts[1] && parts[2]) {
+      renderPerson(parts[1], decodeURIComponent(parts[2]));
+    } else renderNotFound();
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener("hashchange", route);
+  route();
 </script>

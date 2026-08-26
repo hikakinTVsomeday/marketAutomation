@@ -82,7 +82,6 @@
     outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px;
   }
 
-  .mincho { font-family: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif; }
   .mono { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
 
   /* ---- site header ---- */
@@ -92,25 +91,72 @@
     border-bottom: 3px double var(--rule);
   }
   .site-name {
-    font-family: "Shippori Mincho", serif;
+    font-family: "Shippori Mincho", "Hiragino Mincho ProN", serif;
     font-weight: 700; font-size: 1.5rem; letter-spacing: .12em; margin: 0;
   }
+  .site-name a { color: inherit; text-decoration: none; }
   .site-tag { color: var(--ink-soft); font-size: .82rem; letter-spacing: .04em; }
   .proto {
     margin-left: auto; font-size: .7rem; letter-spacing: .14em;
     border: 1px solid var(--rule); color: var(--ink-soft);
     padding: 2px 10px; border-radius: 999px; white-space: nowrap;
   }
+  .crumb { margin: 18px 0 0; font-size: .84rem; }
+
+  /* ---- section label ---- */
+  .sec-label {
+    display: flex; align-items: center; gap: 12px;
+    font-size: .8rem; letter-spacing: .22em; color: var(--ink-soft);
+    margin: 0 0 16px; font-weight: 700;
+  }
+  .sec-label::after { content: ""; flex: 1; border-top: 1px solid var(--rule); }
+
+  /* ---- home ---- */
+  .home-intro { margin: 34px 0 0; font-size: .97rem; max-width: 40em; }
+  .stat-strip {
+    margin: 30px 0 0; display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;
+  }
+  .stat {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 6px;
+    padding: 14px 18px 12px;
+  }
+  .stat .k { font-size: .72rem; letter-spacing: .12em; color: var(--ink-soft); }
+  .stat .v { font-size: 1.55rem; font-weight: 500; line-height: 1.3; }
+  .stat .v small { font-size: .8rem; color: var(--ink-soft); font-weight: 400; }
+
+  .case-list { margin: 40px 0 0; display: grid; gap: 16px; }
+  .case-card {
+    display: block; background: var(--surface); border: 1px solid var(--rule);
+    border-radius: 6px; padding: 18px 22px; color: inherit; text-decoration: none;
+  }
+  .case-card:hover { border-color: var(--accent); }
+  .cc-top { display: flex; gap: 12px; align-items: flex-start; }
+  .cc-eyebrow { font-size: .72rem; letter-spacing: .1em; color: var(--ink-soft); margin: 0 0 4px; }
+  .cc-title {
+    font-family: "Shippori Mincho", serif; font-weight: 600; font-size: 1.06rem;
+    line-height: 1.6; margin: 0; text-wrap: balance;
+  }
+  .cc-grade {
+    margin-left: auto; flex: 0 0 auto;
+    width: 46px; height: 46px; border: 2px solid var(--seal); border-radius: 6px;
+    display: grid; place-items: center; color: var(--seal);
+    font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 1.5rem;
+    rotate: -2deg;
+  }
+  .cc-head { font-size: .87rem; color: var(--ink-soft); margin: 8px 0 0; }
+  .cc-people { font-size: .8rem; color: var(--ink-soft); margin: 10px 0 0; }
+  .cc-people b { color: var(--ink); font-weight: 500; }
 
   /* ---- case header ---- */
-  .case-head { padding: 40px 0 8px; }
+  .case-head { padding: 34px 0 8px; }
   .eyebrow {
     font-size: .74rem; letter-spacing: .18em; color: var(--accent-ink);
     text-transform: uppercase; margin-bottom: 10px;
   }
   h1.case-title {
     font-family: "Shippori Mincho", serif;
-    font-weight: 600; font-size: clamp(1.45rem, 3.4vw, 1.95rem);
+    font-weight: 600; font-size: clamp(1.4rem, 3.4vw, 1.85rem);
     line-height: 1.5; margin: 0 0 22px; text-wrap: balance; letter-spacing: .02em;
   }
   .meta {
@@ -125,12 +171,6 @@
 
   /* ---- tldr ---- */
   .tldr { margin: 40px 0 0; }
-  .sec-label {
-    display: flex; align-items: center; gap: 12px;
-    font-size: .8rem; letter-spacing: .22em; color: var(--ink-soft);
-    margin: 0 0 16px; font-weight: 700;
-  }
-  .sec-label::after { content: ""; flex: 1; border-top: 1px solid var(--rule); }
   .tldr ol { margin: 0; padding: 0; list-style: none; counter-reset: n; display: grid; gap: 10px; }
   .tldr li {
     counter-increment: n; position: relative; padding-left: 40px;
@@ -197,9 +237,7 @@
   /* ---- overview ---- */
   .overview { margin: 44px 0 0; display: grid; gap: 20px; }
   .overview p { margin: 0; font-size: .95rem; }
-  .ov-block h3 {
-    font-family: "Shippori Mincho", serif; font-size: 1rem; margin: 0 0 6px;
-  }
+  .ov-block h3 { font-family: "Shippori Mincho", serif; font-size: 1rem; margin: 0 0 6px; }
 
   /* ---- items ---- */
   .items { margin: 52px 0 0; display: grid; gap: 30px; }
@@ -240,12 +278,9 @@
     font-family: "Shippori Mincho", serif; font-size: .9rem; line-height: 1.9;
     color: var(--ink); border-radius: 0 4px 4px 0;
   }
-  .plain {
-    font-size: .95rem; padding-left: 16px; border-left: 3px solid var(--accent);
-  }
+  .plain { font-size: .95rem; padding-left: 16px; border-left: 3px solid var(--accent); }
   .plain b.lead { font-size: .78rem; letter-spacing: .1em; color: var(--accent-ink); display: block; }
 
-  .patterns { display: flex; flex-wrap: wrap; gap: 8px; }
   .chip {
     font-size: .74rem; letter-spacing: .04em;
     border: 1px solid var(--bad); color: var(--bad);
@@ -258,6 +293,28 @@
     font-size: .9rem;
   }
   .goodpoint b.lead { color: var(--good); font-size: .76rem; letter-spacing: .14em; display: block; margin-bottom: 2px; }
+
+  /* ---- person page ---- */
+  .person-head { padding: 34px 0 8px; }
+  h1.person-name {
+    font-family: "Shippori Mincho", serif; font-weight: 600;
+    font-size: clamp(1.5rem, 3.6vw, 2rem); margin: 0 0 4px; letter-spacing: .06em;
+  }
+  .person-sub { color: var(--ink-soft); font-size: .88rem; margin: 0; }
+  .agg { margin: 34px 0 0; background: var(--surface); border: 1px solid var(--rule);
+    border-radius: 6px; padding: 24px 28px 22px; }
+  .agg-note { font-size: .78rem; color: var(--ink-soft); margin: 4px 0 0; }
+  .dist { margin-top: 22px; display: grid; gap: 8px; }
+  .dist .row { display: grid; grid-template-columns: 11em 1fr 2.2em; gap: 12px; align-items: center; }
+  .dist .bar { height: 7px; background: var(--neutral-soft); border-radius: 4px; overflow: hidden; }
+  .dist .bar i { display: block; height: 100%; border-radius: 4px; }
+  .dist .cnt { font-size: .8rem; text-align: right; }
+  .dist .lbl { font-size: .8rem; color: var(--ink-soft); }
+  .agg h3 { font-size: .78rem; letter-spacing: .16em; color: var(--ink-soft); margin: 26px 0 10px; }
+  .agg h3:first-of-type { margin-top: 22px; }
+  .patt-list { display: grid; gap: 6px; }
+  .patt-list .row { display: flex; gap: 10px; align-items: baseline; font-size: .86rem; }
+  .patt-list .n { color: var(--ink-soft); font-size: .8rem; }
 
   /* ---- question quality / method ---- */
   .qq, .method { margin: 44px 0 0; font-size: .92rem; }
@@ -272,17 +329,18 @@
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .axis .bar i, .resp .bar i { transition: width .6s ease; }
+    .axis .bar i, .resp .bar i, .dist .bar i { transition: width .6s ease; }
   }
   @media (max-width: 560px) {
     .resp { margin-left: 0; width: 100%; }
     .axis { grid-template-columns: 6em 1fr 2.4em; }
+    .dist .row { grid-template-columns: 8.5em 1fr 2.2em; }
   }
 </style>
 
 <div class="wrap">
   <header class="site">
-    <p class="site-name">答弁ウォッチ</p>
+    <p class="site-name"><a href="#/">答弁ウォッチ</a></p>
     <span class="site-tag">国会答弁をAIが読み、評価する</span>
     <span class="proto">PROTOTYPE</span>
   </header>
@@ -290,14 +348,26 @@
   <footer class="site" id="foot"></footer>
 </div>
 
-<script id="data" type="application/json">[{"id": "sangiin-214-014", "source": {"title": "予定納税制度の廃止又は見直しに関する質問主意書", "house_label": "参議院", "session": 214, "number": 14, "submitter": "浜田聡", "submitted_on": "令和6年10月4日", "answered_on": "令和6年10月18日", "answerer": "内閣総理大臣 石破茂", "note": "国会法第75条第2項により答弁延期（10月18日まで）", "urls": {"meisai": "https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/214/meisai/m214014.htm", "question": "https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/214/syuh/s214014.htm", "answer": "https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/214/touh/t214014.htm"}}, "topic_tags": ["税制", "所得税", "行政効率"], "glossary": [{"term": "予定納税", "definition": "前年の所得税が一定額（予定納税基準額15万円）以上だった個人が、その年の税金の一部を7月と11月に前払いする仕組み。前年並みの所得が続く前提で「前年の税額の3分の1ずつ」を先に納め、翌年の確定申告で精算する。所得が前年より大きく減った人は、払いすぎた分が後から還付される。"}, {"term": "質問主意書", "definition": "国会議員が内閣に対して文書で行う質問。内閣は原則7日以内に閣議決定を経た「答弁書」で回答する義務がある（国会法74・75条）。口頭の国会質疑と違い、政府の公式見解が文書で残る。"}, {"term": "予定申告制度", "definition": "予定納税の前身。1947年（昭和22年）に申告納税制度とともに導入され、1954年（昭和29年）に手続簡素化のため現在の予定納税制度に改められた。"}], "tldr": ["質問者は「予定納税は1954年に手続簡素化のために作られた制度で、所得が変動する人には非効率。もう役割を終えたのでは」と、制度の現在の存在意義を6点にわたって問うた。", "政府は統計（5年分の申告者数・還付者数）は具体的に開示した一方、制度の意義については77年前（1947年）の国会答弁を引用して「同様の見解」「変更等は検討していない」と回答した。", "「制度の事務コスト」の質問には『意味するところが明らかではない』という定型句で実質的に回答せず、6問中もっとも強い回避となった。"], "question_overview": "予定納税制度の導入経緯（1947年の予定申告制度→1954年に簡素化目的で予定納税制度へ）を一次資料（帝国議会・国会の議事録）付きで整理したうえで、「所得が前年と大きく変わる納税者にとって非効率で、還付の手間も生んでいる。導入時の『手続の簡素化』という目的はもう失われているのではないか」として、①導入時の政府見解の維持、②制度の目的と利点、③前年割れ・還付の統計、④制度の現在の評価、⑤事務コスト、⑥廃止・見直しの考え、の6点を質した。", "answer_overview": "6問を「一」「二・四・六」「三」「五」の4ブロックに再編して回答。統計（三）は5年分の数値を具体的に示したが、母数として質問の「所得税納税者総数」ではなく「確定申告書提出者数」を断りなく用い、法人・個人別の内訳は「膨大な作業を要する」として示さなかった。制度の意義（二・四・六）は1947年の大臣答弁の引用に依拠し、現在の環境を踏まえた理由の説明はないまま「意義がある」「変更等は検討していない」と結論。事務コスト（五）は「意味するところが明らかではない」として回答しなかった。", "items": [{"q_id": "一", "question_excerpt": "導入当時の政府答弁について、現在の政府においても見解は変わりないか。異なっている点があれば全て示されたい。", "question_plain": "1954年に予定納税制度を導入したときの政府説明（「手続を簡素化するため」等）を、今の政府もそのまま維持しているか？変わった点があれば全部挙げてほしい。", "answer_section": "一について", "answer_excerpt": "お尋ねについては、現時点においても、昭和二十九年二月一日の衆議院予算委員会における渡邊大蔵省主税局長（当時）の答弁及び同月三日の衆議院大蔵委員会における同局長（当時）の答弁と同様の見解である。", "answer_plain": "「今も当時の説明と同じ見解です（変わった点はありません）」と明言した。", "verdict": "answered", "verdict_label": "回答", "patterns": [], "responsiveness": 90, "commentary": "問いに正面から答えている。「異なっている点があれば全て示されたい」に対しては「同様の見解である」がそのまま「異なる点はない」という回答として成立しており、簡潔だが論理的に過不足はない。", "good_point": "Yes/No を曖昧にせず「同様の見解」と断言している。後の質疑で言質として使える明確な回答。"}, {"q_id": "二", "question_excerpt": "予定納税制度の目的と導入による利点を、その理由と併せて示されたい。", "question_plain": "この制度は何のためにあり、何が利点なのか。「理由も併せて」説明してほしい。", "answer_section": "二、四及び六について（一括答弁）", "answer_excerpt": "石橋大蔵大臣（当時）が…「所得を生ずる時期と納税の時期とが近接する…負擔の均衡適正…納税者の納税上の便宜…國庫收入の的確…」と述べており、予定納税制度のお尋ねの「目的」及び「導入による利点」についても同様であると考えている。", "answer_plain": "1947年（昭和22年）に前身の「予定申告制度」を作ったときの大臣答弁を引用し、「予定納税制度の目的・利点もこれと同じ」と回答。現在の視点からの理由説明はない。", "verdict": "partial", "verdict_label": "部分回答", "patterns": [{"code": "P4", "label": "過去答弁引用型"}, {"code": "P5", "label": "まとめ答弁型"}, {"code": "P8", "label": "論点スルー型"}], "responsiveness": 50, "commentary": "目的・利点そのものは（引用の形で）示したが、「その理由と併せて」という要求には応えていない。また質問者が示した経緯では、1954年の予定納税制度の導入目的は「手続の簡素化」（予定申告の形骸化を受けた合理化）だが、答弁は1947年の予定申告制度導入時の一般的な意義説明に差し替えており、77年前の説明が源泉徴収やe-Taxが普及した現在もなぜ妥当なのかには触れていない。", "good_point": null}, {"q_id": "三", "question_excerpt": "令和元年度から直近に至るまでにおける所得税納税者のうち、前年の所得を下回った納税者数、…還付を受けた納税者数、所得税納税者総数を年度ごと、かつ、法人及び個人ごとに示されたい。", "question_plain": "「前年より所得が減った人」「予定納税を払いすぎて還付された人」が実際どれくらいいるのか、直近5年分の数字を出してほしい（＝制度の非効率が実データでどの程度かを見たい）。", "answer_section": "三について", "answer_excerpt": "令和元年分…①約二千二百四万千人、②約六百九十一万四千人、③約三十五万八千人…（令和5年分まで5年分を提示）…「法人及び個人ごと」の実数については、これを把握しておらず、また、これを正確に算出するためには膨大な作業を要することから、お答えすることは困難である。", "answer_plain": "確定申告をした人の数・そのうち前年より所得が減った人の数・予定納税の払いすぎで還付された人の数を、5年分の実数で開示した。ただし母数は質問の「納税者総数」ではなく「確定申告書の提出者数」に置き換わっており、法人・個人別の内訳は「作業が膨大」として拒否した。", "verdict": "partial", "verdict_label": "部分回答", "patterns": [{"code": "P6", "label": "指標すり替え型"}, {"code": "P3", "label": "作業困難型"}], "responsiveness": 65, "commentary": "検証可能な統計を5年分開示した点は答弁書として実質的な情報提供であり評価できる（毎年35万〜49万人が予定納税の払いすぎで還付を受けている、という質問者の問題意識を裏づける数字でもある）。一方で、質問した「所得税納税者総数」は年末調整だけで納税が完結する給与所得者を含むため、断りなく「確定申告書提出者数」（約2,200万人）に差し替えたことで母数の意味が変わっている。なお「法人及び個人ごと」という質問側の要求は、予定納税が個人（所得税）のみの制度で法人には法人税の中間申告という別制度がある点で設計に難があり、政府はその旨を説明することもできたが、定型句での拒否を選んだ。", "good_point": "5年分の実数を①②③に整理して開示。答弁書で具体的な統計が示されるのは比較的誠実な対応で、第三者が検証・引用できる。"}, {"q_id": "四", "question_excerpt": "予定納税制度に対する政府の現在の評価を示されたい。", "question_plain": "この制度は今うまく機能していると評価しているのか？政府としての現在の評価を聞きたい。", "answer_section": "二、四及び六について（一括答弁）", "answer_excerpt": "政府としては、現時点においても、同制度はこのような目的に照らして意義があるものと考えており…", "answer_plain": "「今でも意義がある」という結論のみ。何を根拠にそう評価しているかの説明はない。", "verdict": "partial", "verdict_label": "部分回答", "patterns": [{"code": "P5", "label": "まとめ答弁型"}, {"code": "P8", "label": "論点スルー型"}], "responsiveness": 45, "commentary": "「評価を示せ」に対して結論（意義がある）は述べたが、評価の根拠が1947年の目的の引用のみで、自ら三で示した統計（毎年数十万人が払いすぎ→還付）との関係や、現在の徴税実務での位置づけには一切触れていない。評価と呼べる分析の実体がない。", "good_point": null}, {"q_id": "五", "question_excerpt": "予定納税制度に係る政府の事務コスト及び納税者の事務コストを実績又は推計で示されたい。", "question_plain": "この制度を回すのに行政側・納税者側でどれだけの手間・費用がかかっているのか。実績か推計で示してほしい（＝費用対効果を検証したい）。", "answer_section": "五について", "answer_excerpt": "お尋ねの「予定納税制度に係る政府の事務コスト及び納税者の事務コスト」の具体的に意味するところが明らかではなく、お尋ねについてお答えすることは困難である。", "answer_plain": "「質問の意味がよくわからないので答えられない」として、数字も推計も、把握していないという事実の説明すらしなかった。", "verdict": "evaded", "verdict_label": "実質回答なし", "patterns": [{"code": "P1", "label": "趣旨不明型"}], "responsiveness": 10, "commentary": "「行政コスト」「納税協力コスト」は税制の議論で一般的な概念であり、質問文は「実績又は推計で」と答え方の幅まで示している。趣旨が不明というより、少なくとも「制度単位のコストは把握・推計していない」と実態を答えることは可能だったはずで、6問中もっとも強い回避。廃止・見直しの是非を判断する材料（費用対効果）を求めた、質問の核心部分への不応答である点も重い。", "good_point": null}, {"q_id": "六", "question_excerpt": "手続の簡素化という目的はとうに喪失しているものと思料するが、予定納税制度を廃止又は見直す考えはあるか、政府の見解を示されたい。", "question_plain": "導入時の目的（手続の簡素化）はもう失われているのだから、廃止か見直しを検討しないのか？", "answer_section": "二、四及び六について（一括答弁）", "answer_excerpt": "…その変更等は検討していない。", "answer_plain": "「廃止も見直しも検討していない」と結論は明確に答えた。ただし「目的は喪失しているのでは」という質問者の論拠への反論・説明はない。", "verdict": "partial", "verdict_label": "部分回答", "patterns": [{"code": "P5", "label": "まとめ答弁型"}, {"code": "P8", "label": "論点スルー型"}], "responsiveness": 55, "commentary": "「検討していない」という政府の立場は明確で、この点は回答になっている。ただし、質問者が積み上げた「1954年導入の目的は手続の簡素化であり、それは既に失われた」という論証に対しては、反論も現状の正当化もなく、1947年の目的論の引用で受け流している。結論だけ明確で理由が空白、という答弁書の典型例。", "good_point": "「検討していない」と立場を曖昧にしなかった点は、後の追及の起点になる明確さがある。"}], "overall": {"score": 52, "grade": "C", "grade_scale": "A（誠実に回答）〜E（ほぼ回答拒否）の5段階", "headline": "数字は出したが、制度の存在意義は「77年前の答弁の引用」で受け流し", "axes": {"responsiveness": {"label": "回答充足度", "score": 50, "note": "6問中、正面回答1・部分回答4・実質回答なし1"}, "specificity": {"label": "具体性", "score": 55, "note": "統計は具体的、制度の意義は抽象的な引用のみ"}, "evidence": {"label": "根拠の提示", "score": 40, "note": "現在の視点からの根拠・分析がほぼない"}, "clarity": {"label": "明瞭さ", "score": 70, "note": "文章自体は読み取りやすく、立場（変更しない）は明確"}}, "strengths": ["問一に「同様の見解」と正面から答え、問六でも「変更等は検討していない」と立場を明示した", "問三で5年分の統計（申告者数・前年割れ・還付者数）を実数で開示した。これは質問者の問題意識（毎年数十万人が払いすぎ→還付）を裏づける検証可能なデータでもある"], "weaknesses": ["問五（事務コスト）を「意味するところが明らかではない」という定型句で処理し、把握状況の説明すらしなかった", "問三で母数を「納税者総数」から「確定申告書提出者数」へ断りなく差し替えた", "制度の意義の説明が1947年の大臣答弁の引用のみで、源泉徴収・e-Tax等が普及した現在も妥当とする理由を示していない（二・四・六を一括処理）"]}, "question_quality": {"score": 75, "comment": "導入経緯を帝国議会・国会の議事録という一次資料で裏づけ、統計要求も①〜③に特定できる形で設計されており、質問主意書として水準が高い。一方「法人及び個人ごと」の内訳要求は、予定納税が個人所得税のみの制度（法人は法人税の中間申告）である点で制度理解に難があり、政府に拒否の口実を与えた。"}, "analysis_note": "この解析は Claude（Anthropic）による試作評価です。評価は公開された質問・答弁の全文のみに基づき、提出者・政党への支持・不支持を意味しません。", "analyzed_at": "2026-08-26", "analyzer": "claude (prototype, hand-run)"}]</script>
+<script id="data" type="application/json">[{"id": "sangiin-214-014", "source": {"title": "予定納税制度の廃止又は見直しに関する質問主意書", "house_label": "参議院", "session": 214, "number": 14, "submitter": "浜田聡", "submitted_on": "令和6年10月4日", "answered_on": "令和6年10月18日", "answerer_name": "石破茂", "answerer_title": "内閣総理大臣", "note": "国会法第75条第2項により答弁延期（10月18日まで）", "urls": {"meisai": "https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/214/meisai/m214014.htm", "question": "https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/214/syuh/s214014.htm", "answer": "https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/214/touh/t214014.htm"}}, "topic_tags": ["税制", "所得税", "行政効率"], "glossary": [{"term": "予定納税", "definition": "前年の所得税が一定額（予定納税基準額15万円）以上だった個人が、その年の税金の一部を7月と11月に前払いする仕組み。前年並みの所得が続く前提で「前年の税額の3分の1ずつ」を先に納め、翌年の確定申告で精算する。所得が前年より大きく減った人は、払いすぎた分が後から還付される。"}, {"term": "質問主意書", "definition": "国会議員が内閣に対して文書で行う質問。内閣は原則7日以内に閣議決定を経た「答弁書」で回答する義務がある（国会法74・75条）。口頭の国会質疑と違い、政府の公式見解が文書で残る。"}, {"term": "予定申告制度", "definition": "予定納税の前身。1947年（昭和22年）に申告納税制度とともに導入され、1954年（昭和29年）に手続簡素化のため現在の予定納税制度に改められた。"}], "tldr": ["質問者は「予定納税は1954年に手続簡素化のために作られた制度で、所得が変動する人には非効率。もう役割を終えたのでは」と、制度の現在の存在意義を6点にわたって問うた。", "政府は統計（5年分の申告者数・還付者数）は具体的に開示した一方、制度の意義については77年前（1947年）の国会答弁を引用して「同様の見解」「変更等は検討していない」と回答した。", "「制度の事務コスト」の質問には『意味するところが明らかではない』という定型句で実質的に回答せず、6問中もっとも強い回避となった。"], "question_overview": "予定納税制度の導入経緯（1947年の予定申告制度→1954年に簡素化目的で予定納税制度へ）を一次資料（帝国議会・国会の議事録）付きで整理したうえで、「所得が前年と大きく変わる納税者にとって非効率で、還付の手間も生んでいる。導入時の『手続の簡素化』という目的はもう失われているのではないか」として、①導入時の政府見解の維持、②制度の目的と利点、③前年割れ・還付の統計、④制度の現在の評価、⑤事務コスト、⑥廃止・見直しの考え、の6点を質した。", "answer_overview": "6問を「一」「二・四・六」「三」「五」の4ブロックに再編して回答。統計（三）は5年分の数値を具体的に示したが、母数として質問の「所得税納税者総数」ではなく「確定申告書提出者数」を断りなく用い、法人・個人別の内訳は「膨大な作業を要する」として示さなかった。制度の意義（二・四・六）は1947年の大臣答弁の引用に依拠し、現在の環境を踏まえた理由の説明はないまま「意義がある」「変更等は検討していない」と結論。事務コスト（五）は「意味するところが明らかではない」として回答しなかった。", "items": [{"q_id": "一", "question_excerpt": "導入当時の政府答弁について、現在の政府においても見解は変わりないか。異なっている点があれば全て示されたい。", "question_plain": "1954年に予定納税制度を導入したときの政府説明（「手続を簡素化するため」等）を、今の政府もそのまま維持しているか？変わった点があれば全部挙げてほしい。", "answer_section": "一について", "answer_excerpt": "お尋ねについては、現時点においても、昭和二十九年二月一日の衆議院予算委員会における渡邊大蔵省主税局長（当時）の答弁及び同月三日の衆議院大蔵委員会における同局長（当時）の答弁と同様の見解である。", "answer_plain": "「今も当時の説明と同じ見解です（変わった点はありません）」と明言した。", "verdict": "answered", "verdict_label": "回答", "patterns": [], "responsiveness": 90, "commentary": "問いに正面から答えている。「異なっている点があれば全て示されたい」に対しては「同様の見解である」がそのまま「異なる点はない」という回答として成立しており、簡潔だが論理的に過不足はない。", "good_point": "Yes/No を曖昧にせず「同様の見解」と断言している。後の質疑で言質として使える明確な回答。"}, {"q_id": "二", "question_excerpt": "予定納税制度の目的と導入による利点を、その理由と併せて示されたい。", "question_plain": "この制度は何のためにあり、何が利点なのか。「理由も併せて」説明してほしい。", "answer_section": "二、四及び六について（一括答弁）", "answer_excerpt": "石橋大蔵大臣（当時）が…「所得を生ずる時期と納税の時期とが近接する…負擔の均衡適正…納税者の納税上の便宜…國庫收入の的確…」と述べており、予定納税制度のお尋ねの「目的」及び「導入による利点」についても同様であると考えている。", "answer_plain": "1947年（昭和22年）に前身の「予定申告制度」を作ったときの大臣答弁を引用し、「予定納税制度の目的・利点もこれと同じ」と回答。現在の視点からの理由説明はない。", "verdict": "partial", "verdict_label": "部分回答", "patterns": [{"code": "P4", "label": "過去答弁引用型"}, {"code": "P5", "label": "まとめ答弁型"}, {"code": "P8", "label": "論点スルー型"}], "responsiveness": 50, "commentary": "目的・利点そのものは（引用の形で）示したが、「その理由と併せて」という要求には応えていない。また質問者が示した経緯では、1954年の予定納税制度の導入目的は「手続の簡素化」（予定申告の形骸化を受けた合理化）だが、答弁は1947年の予定申告制度導入時の一般的な意義説明に差し替えており、77年前の説明が源泉徴収やe-Taxが普及した現在もなぜ妥当なのかには触れていない。", "good_point": null}, {"q_id": "三", "question_excerpt": "令和元年度から直近に至るまでにおける所得税納税者のうち、前年の所得を下回った納税者数、…還付を受けた納税者数、所得税納税者総数を年度ごと、かつ、法人及び個人ごとに示されたい。", "question_plain": "「前年より所得が減った人」「予定納税を払いすぎて還付された人」が実際どれくらいいるのか、直近5年分の数字を出してほしい（＝制度の非効率が実データでどの程度かを見たい）。", "answer_section": "三について", "answer_excerpt": "令和元年分…①約二千二百四万千人、②約六百九十一万四千人、③約三十五万八千人…（令和5年分まで5年分を提示）…「法人及び個人ごと」の実数については、これを把握しておらず、また、これを正確に算出するためには膨大な作業を要することから、お答えすることは困難である。", "answer_plain": "確定申告をした人の数・そのうち前年より所得が減った人の数・予定納税の払いすぎで還付された人の数を、5年分の実数で開示した。ただし母数は質問の「納税者総数」ではなく「確定申告書の提出者数」に置き換わっており、法人・個人別の内訳は「作業が膨大」として拒否した。", "verdict": "partial", "verdict_label": "部分回答", "patterns": [{"code": "P6", "label": "指標すり替え型"}, {"code": "P3", "label": "作業困難型"}], "responsiveness": 65, "commentary": "検証可能な統計を5年分開示した点は答弁書として実質的な情報提供であり評価できる（毎年35万〜49万人が予定納税の払いすぎで還付を受けている、という質問者の問題意識を裏づける数字でもある）。一方で、質問した「所得税納税者総数」は年末調整だけで納税が完結する給与所得者を含むため、断りなく「確定申告書提出者数」（約2,200万人）に差し替えたことで母数の意味が変わっている。なお「法人及び個人ごと」という質問側の要求は、予定納税が個人（所得税）のみの制度で法人には法人税の中間申告という別制度がある点で設計に難があり、政府はその旨を説明することもできたが、定型句での拒否を選んだ。", "good_point": "5年分の実数を①②③に整理して開示。答弁書で具体的な統計が示されるのは比較的誠実な対応で、第三者が検証・引用できる。"}, {"q_id": "四", "question_excerpt": "予定納税制度に対する政府の現在の評価を示されたい。", "question_plain": "この制度は今うまく機能していると評価しているのか？政府としての現在の評価を聞きたい。", "answer_section": "二、四及び六について（一括答弁）", "answer_excerpt": "政府としては、現時点においても、同制度はこのような目的に照らして意義があるものと考えており…", "answer_plain": "「今でも意義がある」という結論のみ。何を根拠にそう評価しているかの説明はない。", "verdict": "partial", "verdict_label": "部分回答", "patterns": [{"code": "P5", "label": "まとめ答弁型"}, {"code": "P8", "label": "論点スルー型"}], "responsiveness": 45, "commentary": "「評価を示せ」に対して結論（意義がある）は述べたが、評価の根拠が1947年の目的の引用のみで、自ら三で示した統計（毎年数十万人が払いすぎ→還付）との関係や、現在の徴税実務での位置づけには一切触れていない。評価と呼べる分析の実体がない。", "good_point": null}, {"q_id": "五", "question_excerpt": "予定納税制度に係る政府の事務コスト及び納税者の事務コストを実績又は推計で示されたい。", "question_plain": "この制度を回すのに行政側・納税者側でどれだけの手間・費用がかかっているのか。実績か推計で示してほしい（＝費用対効果を検証したい）。", "answer_section": "五について", "answer_excerpt": "お尋ねの「予定納税制度に係る政府の事務コスト及び納税者の事務コスト」の具体的に意味するところが明らかではなく、お尋ねについてお答えすることは困難である。", "answer_plain": "「質問の意味がよくわからないので答えられない」として、数字も推計も、把握していないという事実の説明すらしなかった。", "verdict": "evaded", "verdict_label": "実質回答なし", "patterns": [{"code": "P1", "label": "趣旨不明型"}], "responsiveness": 10, "commentary": "「行政コスト」「納税協力コスト」は税制の議論で一般的な概念であり、質問文は「実績又は推計で」と答え方の幅まで示している。趣旨が不明というより、少なくとも「制度単位のコストは把握・推計していない」と実態を答えることは可能だったはずで、6問中もっとも強い回避。廃止・見直しの是非を判断する材料（費用対効果）を求めた、質問の核心部分への不応答である点も重い。", "good_point": null}, {"q_id": "六", "question_excerpt": "手続の簡素化という目的はとうに喪失しているものと思料するが、予定納税制度を廃止又は見直す考えはあるか、政府の見解を示されたい。", "question_plain": "導入時の目的（手続の簡素化）はもう失われているのだから、廃止か見直しを検討しないのか？", "answer_section": "二、四及び六について（一括答弁）", "answer_excerpt": "…その変更等は検討していない。", "answer_plain": "「廃止も見直しも検討していない」と結論は明確に答えた。ただし「目的は喪失しているのでは」という質問者の論拠への反論・説明はない。", "verdict": "partial", "verdict_label": "部分回答", "patterns": [{"code": "P5", "label": "まとめ答弁型"}, {"code": "P8", "label": "論点スルー型"}], "responsiveness": 55, "commentary": "「検討していない」という政府の立場は明確で、この点は回答になっている。ただし、質問者が積み上げた「1954年導入の目的は手続の簡素化であり、それは既に失われた」という論証に対しては、反論も現状の正当化もなく、1947年の目的論の引用で受け流している。結論だけ明確で理由が空白、という答弁書の典型例。", "good_point": "「検討していない」と立場を曖昧にしなかった点は、後の追及の起点になる明確さがある。"}], "overall": {"score": 52, "grade": "C", "grade_scale": "A（誠実に回答）〜E（ほぼ回答拒否）の5段階", "headline": "数字は出したが、制度の存在意義は「77年前の答弁の引用」で受け流し", "axes": {"responsiveness": {"label": "回答充足度", "score": 50, "note": "6問中、正面回答1・部分回答4・実質回答なし1"}, "specificity": {"label": "具体性", "score": 55, "note": "統計は具体的、制度の意義は抽象的な引用のみ"}, "evidence": {"label": "根拠の提示", "score": 40, "note": "現在の視点からの根拠・分析がほぼない"}, "clarity": {"label": "明瞭さ", "score": 70, "note": "文章自体は読み取りやすく、立場（変更しない）は明確"}}, "strengths": ["問一に「同様の見解」と正面から答え、問六でも「変更等は検討していない」と立場を明示した", "問三で5年分の統計（申告者数・前年割れ・還付者数）を実数で開示した。これは質問者の問題意識（毎年数十万人が払いすぎ→還付）を裏づける検証可能なデータでもある"], "weaknesses": ["問五（事務コスト）を「意味するところが明らかではない」という定型句で処理し、把握状況の説明すらしなかった", "問三で母数を「納税者総数」から「確定申告書提出者数」へ断りなく差し替えた", "制度の意義の説明が1947年の大臣答弁の引用のみで、源泉徴収・e-Tax等が普及した現在も妥当とする理由を示していない（二・四・六を一括処理）"]}, "question_quality": {"score": 75, "comment": "導入経緯を帝国議会・国会の議事録という一次資料で裏づけ、統計要求も①〜③に特定できる形で設計されており、質問主意書として水準が高い。一方「法人及び個人ごと」の内訳要求は、予定納税が個人所得税のみの制度（法人は法人税の中間申告）である点で制度理解に難があり、政府に拒否の口実を与えた。"}, "analysis_note": "この解析は Claude（Anthropic）による試作評価です。評価は公開された質問・答弁の全文のみに基づき、提出者・政党への支持・不支持を意味しません。", "analyzed_at": "2026-08-26", "analyzer": "claude (prototype, hand-run)"}, {"id": "sangiin-217-132", "source": {"title": "自らを利する政府委員の政策提言に基づき政府が利益誘導に関与した可能性に関する質問主意書", "house_label": "参議院", "session": 217, "number": 132, "submitter": "浜田聡", "submitted_on": "令和7年5月28日", "answered_on": "令和7年6月6日", "answerer_name": "石破茂", "answerer_title": "内閣総理大臣", "urls": {"meisai": "https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/217/meisai/m217132.htm", "question": "https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/217/syuh/s217132.htm", "answer": "https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/217/touh/t217132.htm"}}, "topic_tags": ["行政監視", "審議会", "利益相反"], "glossary": [{"term": "子ども・子育て会議", "definition": "内閣府（当時）に置かれた、保育・子育て支援の制度や公定価格を審議する会議。保育事業者の代表や有識者が委員として参加する。"}, {"term": "公定価格", "definition": "認可保育などの事業に対して国が定める単価。事業者に支払われる公費の基準になるため、その見直しは事業者の収入に直結する。"}, {"term": "利益相反", "definition": "公的な立場での判断・提言が、その人自身の私的な利益と衝突する状態。審議会の委員が自分の事業に有利な政策を提言するようなケースが典型とされる。"}, {"term": "質問主意書", "definition": "国会議員が内閣に文書で行う質問。内閣は閣議決定を経た「答弁書」で回答する義務があり、政府の公式見解が文書で残る。"}], "tldr": ["質問者は、政府の「子ども・子育て会議」の委員が、自らの法人がほぼ独占する事業の収支資料（有効回答は自社1件のみ）を政府に提出させたうえで公費の増額を求めた、と議事録を根拠に主張し、これは利益相反ではないかと質した。", "政府は「利益相反に当たるかは個別具体の内容や事情等により判断されるべきで、一概に答えることは困難」とし、判断基準も、適用されるルールも、名指しされた事案への見解も示さなかった。", "委員の再任時のチェックについては「必要に応じて、過去の提言・活動・作成資料等の内容も確認しつつ総合的に勘案して任命している」と、確認実務の存在は認めた。"], "question_overview": "質問者は、子ども・子育て会議の委員だったNPO法人代表が、自法人がほぼ独占する障害児向け居宅訪問型保育事業について、有効回答1事業所のみの収支調査を内閣府に提出させ、後の会議では同資料を公的な配付資料であるかのように再提出して公費（公定価格）の増額を要求した、資料の会計処理にも複数の問題がある、と議事録・配付資料を根拠に主張。そのうえで、①委員が政策提言によって直接の受益事業者となることは利益相反に当たるか、②委員の再任に当たり過去の提言内容や提出資料の適切さを検証しているか、の2点を質した（事実関係の主張は質問者によるもの）。", "answer_overview": "問一は「個別具体の内容や事情等により判断されるべきものであり、一概にお答えすることは困難」の一文で処理し、利益相反の判断基準や委員に適用されるルールには触れなかった。問二は「『検証』の意味するところが必ずしも明らかではない」と前置きしつつ、「いずれにせよ」として、再任時には必要に応じて過去の提言・活動・作成資料等も確認し総合的に勘案して任命している、と確認実務の存在を答えた。質問が名指しした具体的事案には、答弁全体を通じて一切言及していない。", "items": [{"q_id": "一", "question_excerpt": "子ども・子育て会議等の政府の会議の委員に任命された者が、政府に政策提言を行うことで直接の受益事業者となることは、利益相反行為に当たるか、政府の見解を示されたい。", "question_plain": "政府会議の委員が、自分の事業が直接儲かる方向の政策提言をすることは「利益相反」に当たるのか？政府の見解を聞きたい。", "answer_section": "一について", "answer_excerpt": "お尋ねについては、個別具体の内容や事情等により判断されるべきものであり、一概にお答えすることは困難である。", "answer_plain": "「ケースバイケースなので一概には答えられない」の一文のみ。どんな基準や考慮要素で判断されるのかも示していない。", "verdict": "evaded", "verdict_label": "実質回答なし", "patterns": [{"code": "P9", "label": "一概困難型"}, {"code": "P8", "label": "論点スルー型"}], "responsiveness": 20, "commentary": "利益相反かどうかが事案の内容次第であること自体は不合理ではない。しかし「見解を示されたい」への応答として、判断の際に考慮される要素、審議会委員に適用されるルールや指針の有無、といった一般論すら示していないため、答弁から得られる情報がほぼゼロ。質問の前提となった具体的事案（委員自らが資料を提出させ公費増を要求したとの指摘）に対する言及や、事実関係を確認する姿勢も一切ない。", "good_point": null}, {"q_id": "二", "question_excerpt": "政府委員の再任に当たり、過去に政策提言をした際の提出資料等の内容や、有識者として適切な提言内容であったかについて検証しているか示されたい。", "question_plain": "委員を再任するとき、その人が過去に出した提言や資料が適切だったかをチェックしているのか？", "answer_section": "二について", "answer_excerpt": "御指摘の「政策提言をした際の提出資料等の内容」の「検証」の具体的に意味するところが必ずしも明らかではないが、いずれにせよ、国の審議会等（…）の委員について、お尋ねの「再任」に当たっては、必要に応じて、過去の提言、活動、作成資料等の内容も確認しつつ、知識や経験等を総合的に勘案して、任命しているところである。", "answer_plain": "「趣旨がはっきりしない」と前置きしつつも、「再任時には必要に応じて過去の提言や作成資料も確認し、総合的に判断して任命している」と、確認実務があることは答えた。", "verdict": "partial", "verdict_label": "部分回答", "patterns": [{"code": "P1", "label": "趣旨不明型"}], "responsiveness": 60, "commentary": "「検証しているか」に対して「必要に応じて確認しつつ総合的に勘案」と答えており、裏を返せば体系的・義務的な検証制度はない（ケースに応じた運用である）ことが読み取れる、実質のある回答。ただし冒頭の「趣旨が明らかではない」という前置きは、直後に「いずれにせよ」と回答できていることと整合せず、定型句として付された側面が強い。また、今回名指しされた事案で実際に確認が行われたのかには触れていない。", "good_point": "「審議会等」の範囲を法令の根拠条文つきで定義したうえで、再任時の確認実務の存在を明言した。「必要に応じて」という限定から制度としての検証がないことも読み取れる、追及の足がかりになる答弁。"}], "overall": {"score": 42, "grade": "D", "grade_scale": "A（誠実に回答）〜E（ほぼ回答拒否）の5段階", "headline": "「個別判断」と一般論で、名指しされた事案には最後まで触れず", "axes": {"responsiveness": {"label": "回答充足度", "score": 40, "note": "問一は実質回答なし、問二は限定つきながら回答"}, "specificity": {"label": "具体性", "score": 35, "note": "問二の任命実務はやや具体的、問一は基準の提示ゼロ"}, "evidence": {"label": "根拠の提示", "score": 30, "note": "問二は法令引用あり。問一は根拠・考慮要素の説明なし"}, "clarity": {"label": "明瞭さ", "score": 65, "note": "文章は読み取れるが、「必要に応じて」等の限定で輪郭が曖昧"}}, "strengths": ["問二で、審議会等の法的定義を明示したうえで再任時の確認実務の存在を明言した", "質問者が答弁延期を容認していたにもかかわらず、転送から4日で答弁した"], "weaknesses": ["問一で利益相反の判断基準・考慮要素・適用ルールを一切示さず、「一概に困難」の一文で処理した", "質問の前提となった具体的事案への言及や事実確認の姿勢が、答弁全体を通じてゼロ", "「必要に応じて」「総合的に勘案」という限定つきの一般論にとどまり、今回の事案で確認が行われたかは不明のまま"]}, "question_quality": {"score": 55, "comment": "会議の議事録・配付資料という一次資料に基づく事実の指摘は詳細で具体的。一方で、特定の個人・法人に対する断定的な評価を多く含む点は質問主意書として抑制を欠く。また、肝心の設問2問がいずれも一般論の形（「〜は利益相反に当たるか」「検証しているか」）になっており、「当該事案について事実関係を調査し見解を示せ」という形の設問がないため、政府が具体的事案に一切触れずに答弁を完結できる構造を、質問自体が許してしまっている。"}, "analysis_note": "この解析はAIによる試作評価です。評価は公開された質問・答弁の全文のみに基づき、提出者・政党・政府への支持・不支持を意味しません。質問文中の事実関係の主張は質問者によるものであり、当サイトが事実と認定したものではありません。", "analyzed_at": "2026-08-26", "analyzer": "claude (prototype, hand-run)"}, {"id": "shugiin-198-099", "source": {"title": "日ロ平和条約交渉と日米安保条約の関係に関する質問主意書", "house_label": "衆議院", "session": 198, "number": 99, "submitter": "初鹿明博", "submitted_on": "平成31年3月19日", "answered_on": "平成31年3月29日", "answerer_name": "安倍晋三", "answerer_title": "内閣総理大臣", "urls": {"meisai": "https://www.shugiin.go.jp/internet/itdb_shitsumon.nsf/html/shitsumon/198099.htm", "question": "https://www.shugiin.go.jp/internet/itdb_shitsumon.nsf/html/shitsumon/a198099.htm", "answer": "https://www.shugiin.go.jp/internet/itdb_shitsumon.nsf/html/shitsumon/b198099.htm"}}, "topic_tags": ["外交", "北方領土", "日米安保"], "glossary": [{"term": "日米安保条約第6条", "definition": "米軍が日本国内の「施設及び区域」を使用できると定める条文。ただし、どの施設・区域を提供するかは日米地位協定に基づく手続で決まる。"}, {"term": "日米地位協定", "definition": "在日米軍の法的地位や基地提供の手続を定める協定。施設・区域の提供は、日米合同委員会を通じた両政府の個別の取極（合意）によるとされており、日本側の合意が手続上の前提になっている（第2条）。"}, {"term": "日ソ共同宣言（1956年）", "definition": "平和条約締結後に歯舞群島・色丹島を日本へ引き渡すと定めた宣言。現在の日ロ交渉の出発点で、質問当時は安倍政権がこの宣言を基礎に交渉を加速させていた。"}, {"term": "質問主意書", "definition": "国会議員が内閣に文書で行う質問。内閣は閣議決定を経た「答弁書」で回答する義務があり、政府の公式見解が文書で残る。"}], "tldr": ["プーチン大統領が「北方領土を引き渡せば米軍基地が置かれるのでは」と懸念を示したとの報道を受け、質問者は「日本は安保条約上、米軍の基地設置を拒否できるのか」「総理が『島に基地は置かない』と伝えたという報道は事実か」など4点を質した。", "政府は4問すべてに対し、「ロシア連邦政府との今後の交渉に支障を来すおそれがあることから、お答えすることは差し控えたい」という一文だけで回答を拒否した。", "公開されている条約の一般的な解釈（問一・四)や、米国と協議したことの「有無」（問三)まで交渉を理由に封印されており、答弁書から得られる情報は実質ゼロ。"], "question_overview": "北方領土交渉が停滞し、ロシア側が「返還後の米軍基地設置」への懸念を公言するなか、交渉の最大の争点である安保条約との関係について、①米国が基地設置を求めた場合に日本は拒めるのか（根拠条文つきで）、②安倍総理が「歯舞・色丹に基地は置かない」とロシア側に伝えたとの報道は事実か、③基地設置の可能性を米国と協議したことはあるか（有無）、④「島に基地を置かない」という取り決めは条約上可能か、の4点を質した。", "answer_overview": "答弁書の本文は一文のみ。「一から四までについて お尋ねについては、ロシア連邦政府との今後の交渉に支障を来すおそれがあることから、お答えすることは差し控えたい。」──4問を一括りにし、条約解釈の一般論も、事実の有無も、すべて「交渉への支障」を理由に回答しなかった。", "items": [{"q_id": "一", "question_excerpt": "日米安保条約に基づき、米国が基地の設置を求めて来た時、日本側の都合により設置を拒むことができるのか、関連する協定や覚書等が存在するならば、その条文を示して明らかにしてください。", "question_plain": "米国が「ここに基地を置きたい」と求めてきたとき、日本は断れるのか？根拠となる条文があるなら示してほしい。", "answer_section": "一から四までについて（一括答弁）", "answer_excerpt": "お尋ねについては、ロシア連邦政府との今後の交渉に支障を来すおそれがあることから、お答えすることは差し控えたい。", "answer_plain": "「ロシアとの交渉に差し支えるので答えない」の一文のみ。条文の提示もなし。", "verdict": "refused_with_reason", "verdict_label": "回答拒否（理由明示）", "patterns": [{"code": "P2", "label": "差し控え型"}, {"code": "P5", "label": "まとめ答弁型"}], "responsiveness": 5, "commentary": "公開されている条約の一般的な仕組みを問う設問で、進行中の交渉の中身とは切り分けて答えられる性質のもの。日米地位協定第2条は、施設・区域の提供が日米合同委員会を通じた個別の取極（合意）で決まることを定めており、この一般的な枠組み自体は政府がこれまで国会で繰り返し説明してきた内容でもある。それすら「交渉への支障」を理由に拒む必然性は、答弁書のどこにも説明されていない。", "good_point": null}, {"q_id": "二", "question_excerpt": "安倍総理が、歯舞諸島、色丹島に米軍基地を置くことはないと伝えたと報じられている（平成三十年十一月十六日付朝日新聞朝刊等）が、それは事実か。事実だとしたら、島に米軍基地を置かないと現時点で約束出来る根拠を示してください。", "question_plain": "「総理がロシア側に『引き渡し後の島に米軍基地は置かない』と伝えた」という報道は本当か？本当なら、日本側だけでそんな約束ができる根拠は何か？", "answer_section": "一から四までについて（一括答弁）", "answer_excerpt": "お尋ねについては、ロシア連邦政府との今後の交渉に支障を来すおそれがあることから、お答えすることは差し控えたい。", "answer_plain": "報道の事実確認も、根拠の説明もなし。", "verdict": "refused_with_reason", "verdict_label": "回答拒否（理由明示）", "patterns": [{"code": "P2", "label": "差し控え型"}, {"code": "P5", "label": "まとめ答弁型"}], "responsiveness": 8, "commentary": "首脳間交渉での発言内容の確認は外交上の機微に当たり、4問の中では拒否の理由がもっとも成立しやすい設問ではある。ただし、報道が事実であれば「米国の意向を確認しないまま対ロ約束をしたのか」という民主的統制の核心に関わる論点であり、確認も否定もしないままでは、国会が交渉方針を検証する手段が事実上なくなる。", "good_point": null}, {"q_id": "三", "question_excerpt": "北方領土の島々に米軍基地を置かないと米国から確約を得ることが、日ロ平和条約交渉を進展させる前提とならざるを得ないと考えるが、北方領土への米軍基地の設置の可能性について、米国と協議を実施したことはあるのか、事実関係の有無を示してください。", "question_plain": "「北方領土に基地を置くかどうか」を米国と協議したことはあるのか。中身ではなく、有無だけでも示してほしい。", "answer_section": "一から四までについて（一括答弁）", "answer_excerpt": "お尋ねについては、ロシア連邦政府との今後の交渉に支障を来すおそれがあることから、お答えすることは差し控えたい。", "answer_plain": "協議の「有無」すら示さなかった。", "verdict": "refused_with_reason", "verdict_label": "回答拒否（理由明示）", "patterns": [{"code": "P2", "label": "差し控え型"}, {"code": "P5", "label": "まとめ答弁型"}], "responsiveness": 5, "commentary": "協議の中身ではなく「有無」という最小限の事実だけを問う、拒否されにくいよう意図的に絞り込まれた設問。その最小限すら開示しなかったことで、「交渉への支障」という理由がどの範囲まで及ぶのか（際限があるのか）が答弁からは判別できなくなっている。", "good_point": null}, {"q_id": "四", "question_excerpt": "北方領土の島々に米軍基地を設置しないこととする取り決めを結ぶことは、日米安保条約それに付随する様々な協定上、可能なのか、政府の見解を伺います。", "question_plain": "「この島には基地を置かない」という日米間の取り決めを結ぶことは、いまの条約の仕組み上そもそも可能なのか？", "answer_section": "一から四までについて（一括答弁）", "answer_excerpt": "お尋ねについては、ロシア連邦政府との今後の交渉に支障を来すおそれがあることから、お答えすることは差し控えたい。", "answer_plain": "条約解釈の一般論としても答えなかった。", "verdict": "refused_with_reason", "verdict_label": "回答拒否（理由明示）", "patterns": [{"code": "P2", "label": "差し控え型"}, {"code": "P5", "label": "まとめ答弁型"}], "responsiveness": 5, "commentary": "問一と同じく、特定の交渉から切り離して答えられる条約解釈の一般論。ここまで一括して一文で処理したことで、答弁書全体の情報量がゼロになり、「答えられない範囲」の説明責任も果たされていない。", "good_point": null}], "overall": {"score": 8, "grade": "E", "grade_scale": "A（誠実に回答）〜E（ほぼ回答拒否）の5段階", "headline": "4問を一文で封印 — 条約解釈の一般論まで「交渉への支障」", "axes": {"responsiveness": {"label": "回答充足度", "score": 5, "note": "4問すべて回答拒否。実質的な情報はゼロ"}, "specificity": {"label": "具体性", "score": 5, "note": "具体的内容は一切なし"}, "evidence": {"label": "根拠の提示", "score": 10, "note": "拒否理由（交渉への支障）は示したが、設問ごとの説明はない"}, "clarity": {"label": "明瞭さ", "score": 40, "note": "一文自体は明瞭だが、どの設問にどう支障が生じるのかは読み取れない"}}, "strengths": ["「答えない」という判断とその理由（交渉への支障）自体は明示しており、無視や論点ずらしではない", "提出から10日で答弁しており、手続としては迅速"], "weaknesses": ["4問を「一から四までについて」と一括りにし、条約解釈・事実確認・協議の有無という設問の性質の違いを区別しなかった", "公開されている条約の一般的解釈（問一・四）まで「交渉への支障」の対象にした", "協議の「有無」（問三）という最小限の事実すら示さず、拒否の範囲に際限がない"]}, "question_quality": {"score": 80, "comment": "報道を日付・媒体つきで出典明示し、設問を「条文の提示」「事実確認」「有無のみ」「条約解釈」と型別に設計して、段階的に拒否しにくくする工夫がされた質問。その全てが一文で拒否されたことで、かえって答弁側の姿勢が際立つ構図になっている。"}, "analysis_note": "この解析はAIによる試作評価です。評価は公開された質問・答弁の全文のみに基づき、提出者・政党・政府への支持・不支持を意味しません。", "analyzed_at": "2026-08-26", "analyzer": "claude (prototype, hand-run)"}]</script>
 <script>
   const CASES = JSON.parse(document.getElementById("data").textContent);
   const esc = s => String(s ?? "").replace(/[&<>"']/g,
     c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
-  const VERDICT_COLOR = { answered: "var(--good)", partial: "var(--warn)",
-    evaded: "var(--bad)", refused_with_reason: "var(--neutral-pill)" };
+  const VERDICTS = [
+    ["answered", "回答", "var(--good)"],
+    ["partial", "部分回答", "var(--warn)"],
+    ["evaded", "実質回答なし", "var(--bad)"],
+    ["refused_with_reason", "回答拒否（理由明示）", "var(--neutral-pill)"],
+  ];
+  const VERDICT_COLOR = Object.fromEntries(VERDICTS.map(([k, , c]) => [k, c]));
+
+  const AXES = [
+    ["responsiveness", "回答充足度"],
+    ["specificity", "具体性"],
+    ["evidence", "根拠の提示"],
+    ["clarity", "明瞭さ"],
+  ];
 
   const PATTERN_LEGEND = [
     ["P1 趣旨不明型", "「お尋ねの趣旨が明らかではない」として答えない"],
@@ -308,14 +378,48 @@
     ["P6 指標すり替え型", "問われた数値・定義と異なるものに断りなく置き換えて答える"],
     ["P7 仮定不応答型", "「仮定の質問にはお答えできない」として答えない"],
     ["P8 論点スルー型", "質問者の論拠・前提に反論も説明もせず結論だけ述べる"],
+    ["P9 一概困難型", "「個別具体の事情により一概にお答えすることは困難」として基準を示さない"],
   ];
 
-  function axisRow(a) {
+  const gradeOf = s => s >= 85 ? "A" : s >= 70 ? "B" : s >= 50 ? "C" : s >= 30 ? "D" : "E";
+  const avg = arr => arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
+  const r1 = x => Math.round(x * 10) / 10;
+
+  const personHref = (role, name) => `#/person/${role}/${encodeURIComponent(name)}`;
+  const bySubmitter = name => CASES.filter(c => c.source.submitter === name);
+  const byAnswerer = name => CASES.filter(c => c.source.answerer_name === name);
+
+  /* ---------- shared fragments ---------- */
+
+  function axisRow(label, score) {
     return `<div class="axis">
-      <span class="name">${esc(a.label)}</span>
-      <span class="bar"><i style="width:${a.score}%"></i></span>
-      <span class="val mono">${a.score}</span>
+      <span class="name">${esc(label)}</span>
+      <span class="bar"><i style="width:${score}%"></i></span>
+      <span class="val mono">${r1(score)}</span>
     </div>`;
+  }
+
+  function caseCard(c) {
+    const s = c.source, o = c.overall;
+    return `<a class="case-card" href="#/case/${esc(c.id)}">
+      <div class="cc-top">
+        <div>
+          <p class="cc-eyebrow">${esc(s.house_label)} 第${s.session}回国会 質問第${s.number}号 ・ ${esc(s.answered_on)}答弁</p>
+          <p class="cc-title">${esc(s.title)}</p>
+        </div>
+        <span class="cc-grade" aria-label="総合評価 ${esc(o.grade)}">${esc(o.grade)}</span>
+      </div>
+      <p class="cc-head">${esc(o.headline)}　<span class="mono">${o.score}/100</span></p>
+      <p class="cc-people">提出 <b>${esc(s.submitter)}</b>　／　答弁 <b>${esc(s.answerer_title)} ${esc(s.answerer_name)}</b></p>
+    </a>`;
+  }
+
+  function distRows(entries, total) {
+    return entries.map(([label, count, color]) => `<div class="row">
+      <span class="lbl">${esc(label)}</span>
+      <span class="bar"><i style="width:${total ? count / total * 100 : 0}%;background:${color}"></i></span>
+      <span class="cnt mono">${count}</span>
+    </div>`).join("");
   }
 
   function itemCard(it) {
@@ -345,19 +449,60 @@
     </article>`;
   }
 
-  function render(c) {
+  function siteFooter(extra) {
+    return `${extra ? esc(extra) + "<br>" : ""}
+      本サイトの評価はAIによる試作です。公開された質問・答弁の全文のみに基づき、
+      特定の政党・議員・政府への支持・不支持を意味しません。
+      出典: 参議院・衆議院「質問主意書・答弁書」`;
+  }
+
+  /* ---------- views ---------- */
+
+  function renderHome() {
+    const scores = CASES.map(c => c.overall.score);
+    const nItems = CASES.reduce((n, c) => n + c.items.length, 0);
+    document.getElementById("app").innerHTML = `
+      <p class="home-intro">国会の質問主意書と政府答弁書をAIが読み、
+      「何を聞いたのか」「どう答えたのか」を平易な日本語に翻訳したうえで、
+      答弁が質問に実質的に答えているか（誠実度）を設問ごとに評価します。
+      誠実な回答も、回避もそのまま記録します。</p>
+      <div class="stat-strip">
+        <div class="stat"><span class="k">収録した答弁書</span><br><span class="v mono">${CASES.length}<small> 件</small></span></div>
+        <div class="stat"><span class="k">逐条評価した設問</span><br><span class="v mono">${nItems}<small> 問</small></span></div>
+        <div class="stat"><span class="k">平均誠実度スコア</span><br><span class="v mono">${r1(avg(scores))}<small> /100</small></span></div>
+      </div>
+      <div class="case-list">
+        <h2 class="sec-label" style="margin:24px 0 0">収録答弁</h2>
+        ${CASES.map(caseCard).join("")}
+      </div>
+      <section class="method">
+        <h2 class="sec-label" style="margin-top:44px">評価の方法</h2>
+        <p>評価対象は「答弁が質問に実質的に答えているか」のみで、政策の当否や政治的立場は評価しません。
+        設問ごとに 回答／部分回答／実質回答なし／回答拒否（理由明示）を判定し、
+        回避の手法を次の分類でタグ付けします。質問側の質も同じ基準で評価します。</p>
+        <div class="legend">
+          ${PATTERN_LEGEND.map(([code, txt]) =>
+            `<div class="row"><span class="code">${esc(code)}</span><span>${esc(txt)}</span></div>`).join("")}
+        </div>
+      </section>`;
+    document.getElementById("foot").innerHTML = siteFooter("");
+  }
+
+  function renderCase(c) {
     const s = c.source, o = c.overall;
     document.getElementById("app").innerHTML = `
+      <p class="crumb"><a href="#/">← 一覧へ</a></p>
       <section class="case-head">
         <p class="eyebrow">${esc(s.house_label)} 第${s.session}回国会 質問第${s.number}号</p>
         <h1 class="case-title">${esc(s.title)}</h1>
         <dl class="meta">
-          <div><dt>提出者</dt><dd>${esc(s.submitter)}</dd></div>
+          <div><dt>提出者</dt><dd><a href="${personHref("submitter", s.submitter)}">${esc(s.submitter)}</a></dd></div>
+          <div><dt>答弁者</dt><dd><a href="${personHref("answerer", s.answerer_name)}">${esc(s.answerer_title)} ${esc(s.answerer_name)}</a></dd></div>
           <div><dt>提出日</dt><dd>${esc(s.submitted_on)}</dd></div>
           <div><dt>答弁書受領日</dt><dd>${esc(s.answered_on)}</dd></div>
           <div><dt>分野</dt><dd>${(c.topic_tags || []).map(esc).join("・")}</dd></div>
         </dl>
-        <p class="src-links">原文（参議院サイト）:
+        <p class="src-links">原文（${esc(s.house_label)}サイト）:
           <a href="${esc(s.urls.question)}" target="_blank" rel="noopener">質問本文</a>
           <a href="${esc(s.urls.answer)}" target="_blank" rel="noopener">答弁本文</a>
           <a href="${esc(s.urls.meisai)}" target="_blank" rel="noopener">経過情報</a>
@@ -378,7 +523,7 @@
           </div>
         </div>
         <div class="axes">
-          ${["responsiveness","specificity","evidence","clarity"].map(k => axisRow(o.axes[k])).join("")}
+          ${AXES.map(([k]) => axisRow(o.axes[k].label, o.axes[k].score)).join("")}
         </div>
         <div class="sw">
           <div class="plus"><h3>誠実だった点</h3><ul>${o.strengths.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
@@ -399,7 +544,7 @@
 
       <section>
         <div class="items">
-          <h2 class="sec-label" style="margin:0">逐条評価 — ６つの設問と答弁</h2>
+          <h2 class="sec-label" style="margin:0">逐条評価 — ${c.items.length}つの設問と答弁</h2>
           ${c.items.map(itemCard).join("")}
         </div>
       </section>
@@ -407,23 +552,90 @@
       <section class="qq">
         <h2 class="sec-label">質問の質について</h2>
         <p>${esc(c.question_quality.comment)}（設計評価: <span class="mono">${c.question_quality.score}</span>/100）</p>
-      </section>
-
-      <section class="method">
-        <h2 class="sec-label">評価の方法と限界</h2>
-        <p>評価対象は「答弁が質問に実質的に答えているか」のみで、政策の当否や政治的立場は評価しません。
-        判定は公開された質問・答弁の全文に基づき、AI（Claude）が逐条で行っています。
-        回避パターンは次の分類を用いています。</p>
-        <div class="legend">
-          ${PATTERN_LEGEND.map(([code, txt]) =>
-            `<div class="row"><span class="code">${esc(code)}</span><span>${esc(txt)}</span></div>`).join("")}
-        </div>
       </section>`;
 
     document.getElementById("foot").innerHTML =
       `${esc(c.analysis_note)}<br>
-       出典: 参議院「質問主意書」（<a href="${esc(s.urls.meisai)}" target="_blank" rel="noopener">第${s.session}回国会 質問第${s.number}号</a>）／解析日: ${esc(c.analyzed_at)}`;
+       出典: ${esc(s.house_label)}「質問主意書」（<a href="${esc(s.urls.meisai)}" target="_blank" rel="noopener">第${s.session}回国会 質問第${s.number}号</a>）／解析日: ${esc(c.analyzed_at)}`;
   }
 
-  render(CASES[0]);
+  function renderPerson(role, name) {
+    const isSub = role === "submitter";
+    const cs = isSub ? bySubmitter(name) : byAnswerer(name);
+    if (!cs.length) { renderNotFound(); return; }
+
+    const items = cs.flatMap(c => c.items);
+    const meanScore = avg(cs.map(c => c.overall.score));
+    const meanQQ = avg(cs.map(c => c.question_quality.score));
+    const verdictCounts = VERDICTS.map(([k, label, color]) =>
+      [label, items.filter(it => it.verdict === k).length, color]);
+    const pattCounts = {};
+    for (const it of items) for (const p of it.patterns)
+      pattCounts[p.label] = (pattCounts[p.label] || 0) + 1;
+    const patts = Object.entries(pattCounts).sort((a, b) => b[1] - a[1]);
+    const titles = isSub ? [] : [...new Set(cs.map(c => c.source.answerer_title))];
+
+    const scopeNote = isSub
+      ? "スコア・判定・パターンは、この議員が提出した質問主意書に対する政府答弁の集計です。"
+      : "スコア・判定・パターンは、この答弁者名で受領した答弁書の集計です（答弁書は内閣として閣議決定されたもの）。";
+
+    document.getElementById("app").innerHTML = `
+      <p class="crumb"><a href="#/">← 一覧へ</a></p>
+      <section class="person-head">
+        <p class="eyebrow">${isSub ? "質問提出者" : "答弁者"}${titles.length ? "　" + esc(titles.join("・")) : ""}</p>
+        <h1 class="person-name">${esc(name)}</h1>
+        <p class="person-sub">収録 ${cs.length}件 ・ 逐条評価 ${items.length}問</p>
+      </section>
+
+      <section class="agg">
+        <div class="overall-top">
+          <div class="seal" role="img" aria-label="平均評価 ${gradeOf(meanScore)}">${gradeOf(meanScore)}<small>平均評価</small></div>
+          <div class="overall-main">
+            <p class="headline">${isSub ? "この議員の質問への答弁は" : "この答弁者の答弁は"}、平均 <span class="mono">${r1(meanScore)}</span>/100</p>
+            <p class="agg-note">${esc(scopeNote)}</p>
+          </div>
+        </div>
+        <h3>評価軸の平均</h3>
+        <div class="axes">
+          ${AXES.map(([k, label]) => axisRow(label, avg(cs.map(c => c.overall.axes[k].score)))).join("")}
+        </div>
+        <h3>設問ごとの判定の内訳（${items.length}問）</h3>
+        <div class="dist">${distRows(verdictCounts, items.length)}</div>
+        ${patts.length ? `<h3>使われた回避パターン</h3>
+        <div class="patt-list">
+          ${patts.map(([label, n]) => `<div class="row"><span class="chip">${esc(label)}</span><span class="n mono">×${n}</span></div>`).join("")}
+        </div>` : ""}
+        ${isSub ? `<h3>質問の質（設計評価）の平均</h3>
+        <div class="axes">${axisRow("質問の質", meanQQ)}</div>` : ""}
+      </section>
+
+      <div class="case-list">
+        <h2 class="sec-label" style="margin:40px 0 0">${isSub ? "提出した質問主意書" : "答弁した質問主意書"}</h2>
+        ${cs.map(caseCard).join("")}
+      </div>`;
+    document.getElementById("foot").innerHTML = siteFooter("");
+  }
+
+  function renderNotFound() {
+    document.getElementById("app").innerHTML =
+      `<p class="crumb"><a href="#/">← 一覧へ</a></p><p style="margin-top:30px">ページが見つかりませんでした。</p>`;
+    document.getElementById("foot").innerHTML = siteFooter("");
+  }
+
+  /* ---------- router ---------- */
+
+  function route() {
+    const h = location.hash || "#/";
+    const parts = h.replace(/^#\//, "").split("/").filter(Boolean);
+    if (parts.length === 0) renderHome();
+    else if (parts[0] === "case" && parts[1]) {
+      const c = CASES.find(x => x.id === decodeURIComponent(parts[1]));
+      c ? renderCase(c) : renderNotFound();
+    } else if (parts[0] === "person" && parts[1] && parts[2]) {
+      renderPerson(parts[1], decodeURIComponent(parts[2]));
+    } else renderNotFound();
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener("hashchange", route);
+  route();
 </script>
