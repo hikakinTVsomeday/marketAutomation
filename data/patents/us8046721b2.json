@@ -1,0 +1,16 @@
+{
+  "id": "us8046721b2",
+  "number": "US8046721B2",
+  "url": "https://patents.google.com/patent/US8046721B2/en",
+  "title": "Unlocking a device by performing gestures on an unlock image",
+  "filing_date": "2009-06-02",
+  "grant_date": "2011-10-25",
+  "status": "Expired - Lifetime",
+  "expiration_date": "2025-12-23",
+  "inventors": ["Imran Chaudhri", "Bas Ording", "Freddy Allen Anzures"],
+  "original_assignee": "Apple Inc",
+  "abstract": "A method controls an electronic device with a touch-sensitive display by detecting contact while in a locked state, moving an image according to the contact, and transitioning to an unlocked state if the contact matches a predefined gesture. The device displays visual cues and unlock images on the touch screen. When a user performs the correct gesture with respect to the unlock image—such as dragging it to a predefined location or along a predefined path—the device transitions to the unlock state. Multiple unlock images can correspond to different applications or events, allowing users to unlock directly to specific functions.",
+  "gist": "Apple's slide-to-unlock patent: on a locked touch-screen device, dragging an on-screen image along a predefined path unlocks it, with animated visual cues showing the way. The gesture prevents accidental activation while staying instantly discoverable.",
+  "fetched_at": "2026-08-26",
+  "source": "Google Patents via WebFetch"
+}

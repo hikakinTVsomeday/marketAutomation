@@ -1,0 +1,16 @@
+{
+  "id": "us7311526b2",
+  "number": "US7311526B2",
+  "url": "https://patents.google.com/patent/US7311526B2/en",
+  "title": "Magnetic connector for electronic device",
+  "filing_date": "2005-09-26",
+  "grant_date": "2007-12-25",
+  "status": "Expired - Lifetime",
+  "expiration_date": "2025-09-26",
+  "inventors": ["Matthew Dean Rohrbach", "Mark Edward Doutt", "Bartley K. Andre", "Kanye Lim", "John C. DiFonzo", "Jean-Marc Gery"],
+  "original_assignee": "Apple Inc",
+  "abstract": "A magnetic connector system for electronic devices featuring a plug and receptacle with magnetic elements that couple magnetically while maintaining electrical contact through spring-loaded pins and contact plates. The connector allows safe disconnection when excessive force is applied, preventing damage to connected devices. The system utilizes permanent rare earth magnets or electromagnets paired with ferromagnetic materials to achieve reliable magnetic coupling without interfering with device operations.",
+  "gist": "Apple's MagSafe patent: a power connector that couples by magnetic attraction instead of a mechanical fit. Spring-loaded pins press against flat contact plates, and when the cable is yanked at an angle the connector breaks away safely instead of dragging the laptop off the table.",
+  "fetched_at": "2026-08-26",
+  "source": "Google Patents via WebFetch"
+}

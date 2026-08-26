@@ -1,0 +1,11 @@
+{
+  "id": "us7523695b2",
+  "number": "US7523695B2",
+  "url": "https://patents.google.com/patent/US7523695B2/en",
+  "title": "System for dispensing metered volumes of heated water to the brew chamber of a single serve beverage brewer",
+  "title_ja": "Keurigの湯量制御システム",
+  "original_assignee": "Keurig Inc",
+  "expected_expiration": "2026-09-06",
+  "status_checked": "Active（2026-08-25 に Google Patents で確認）",
+  "why_hot": "1杯抽出コーヒーマシンの心臓部「決まった量の湯を正確に送る」仕組み。失効すれば互換マシンや自作抽出キットの設計自由度が一段上がる。"
+}

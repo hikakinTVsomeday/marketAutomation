@@ -37,6 +37,16 @@
   </div>
 </section>
 
+<section class="upcoming-strip">
+  <div class="wrap">
+    <div class="up-head">
+      <p class="m-label">COMING SOON — 切れたてカレンダー</p>
+      <a class="ics-link" href="./expiring.ics" download>📅 iCal購読用 .ics（公開サイトで有効）</a>
+    </div>
+    <div id="upcoming-list"></div>
+  </div>
+</section>
+
 <main class="wrap">
   <div class="controls" id="controls" role="group" aria-label="カテゴリで絞り込み">
     <span class="label">MINE MAP</span>
@@ -59,6 +69,7 @@
 
 <script>
 const ENTRIES = /*__DATA__*/[];
+const UPCOMING = /*__UPCOMING__*/[];
 
 const grid = document.getElementById("grid");
 const controls = document.getElementById("controls");
@@ -214,6 +225,29 @@ document.addEventListener("keydown", (ev) => {
   if (ev.key === "Escape" && !overlay.hidden) closeModal();
 });
 
+function renderUpcoming() {
+  const box = document.getElementById("upcoming-list");
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  box.innerHTML = UPCOMING.map((u) => {
+    const exp = new Date(u.expected_expiration + "T00:00:00");
+    const days = Math.ceil((exp - today) / 86400000);
+    const count = days > 0
+      ? `<span class="up-days">あと<strong>${days}</strong>日</span>`
+      : `<span class="up-days up-free">解禁済み！</span>`;
+    return `
+    <div class="up-row">
+      <span class="up-date mono">${esc(u.expected_expiration)}</span>
+      ${count}
+      <div class="up-body">
+        <a href="${esc(u.url)}" target="_blank" rel="noopener">${esc(u.title_ja)} <span class="mono">${esc(u.number)}</span></a>
+        <p>${esc(u.why_hot)}</p>
+      </div>
+    </div>`;
+  }).join("");
+}
+
 buildControls();
 render();
+renderUpcoming();
 </script>

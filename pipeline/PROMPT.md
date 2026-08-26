@@ -48,6 +48,28 @@ Claude Code のセッションで「US1234567 を追加して」と頼めば、�
 
 category は現在 `tech / commerce / food / pet / mobility / hardware / goods / toy` を使用中（新設可）。
 
+## 切れたてカレンダー（data/upcoming/）
+
+まだ生きているが失効が近い有名特許は `data/upcoming/<id>.json` に登録する。
+ビルド時にサイトの「COMING SOON」欄と、購読可能な `dist/expiring.ics` が生成される。
+
+```jsonc
+{
+  "id": "us1234567b2",
+  "number": "US1234567B2",
+  "url": "https://patents.google.com/patent/...",
+  "title": "原題",
+  "title_ja": "日本語の呼び名",
+  "original_assignee": "権利者",
+  "expected_expiration": "2027-06-01",   // Google Patents表示のadjusted expiration
+  "status_checked": "Active（YYYY-MM-DD に Google Patents で確認）",
+  "why_hot": "切れたら何が自由になるか"
+}
+```
+
+- **必ずGoogle Patentsの現ステータスがActiveであることを確認して登録する**（ネットの失効情報はガセが多い。AeroPressで実証済み）。
+- 失効日を過ぎたら通常の手順で本収録し、upcomingから削除する。
+
 ## 生成の原則
 
 - **誇張しない**。story は確認できる事実のみ。曖昧なものは書かない。
