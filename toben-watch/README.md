@@ -12,7 +12,7 @@
 サイトは「一覧 → 答弁の逐条評価 → 提出者／答弁者ページ」の3層構成で、
 提出者・答弁者ごとに平均スコア・判定分布・頻出回避パターンを集計表示します。
 
-収録サンプル（6件）:
+収録サンプル（9件）:
 
 | 件名 | 提出者 | 答弁者 | 評価 |
 |---|---|---|---|
@@ -22,6 +22,9 @@
 | [「そもそも」の意味として「基本的に」と記載している辞書](https://www.shugiin.go.jp/internet/itdb_shitsumon.nsf/html/shitsumon/193264.htm)（衆・193回264号） | 初鹿明博 | 安倍晋三 | **E（18）** 辞書の伝言ゲームで「基本」を捻出。「調べたのか」には答えず |
 | [内閣総理大臣夫人の法的地位](https://www.shugiin.go.jp/internet/itdb_shitsumon.nsf/html/shitsumon/193105.htm)（衆・193回105号） | 逢坂誠二 | 安倍晋三 | **C（58）** 「私人」閣議決定。炎上したが定義と根拠は示した |
 | [虚偽答弁及び説明拒否発言の連発](https://www.shugiin.go.jp/internet/itdb_shitsumon.nsf/html/shitsumon/204003.htm)（衆・204回3号） | 中谷一馬 | 菅義偉 | **D（34）** 説明拒否を問われ「合理的理由があれば拒否も許される」と回答 |
+| [国旗の損壊等の処罰に関する法律](https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/221/meisai/m221110.htm)（参・221回110号） | 小西洋之 | 高市早苗 | **D（42）** 「議員立法だから立場にない」を盾に合憲性は語らず。警察通達は開示 |
+| [象徴天皇制の在り方等](https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/221/meisai/m221111.htm)（参・221回111号） | 小西洋之 | 高市早苗 | **D（49）** 「史料に基づけば」の使い分けで「歴史的事実か」を回避 |
+| [皇室典範改正の憲法問題等](https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/221/meisai/m221112.htm)（参・221回112号） | 小西洋之 | 高市早苗 | **D（41）** 「なぜ適用除外を設けなかったのか」に最後まで答えず |
 
 ## 構成
 
