@@ -1,0 +1,16 @@
+{
+  "id": "us5966526a",
+  "number": "US5966526A",
+  "url": "https://patents.google.com/patent/US5966526A/en",
+  "title": "Simulation device for fostering a virtual creature",
+  "filing_date": "1997-06-11",
+  "grant_date": "1999-10-12",
+  "status": "Expired - Lifetime",
+  "expiration_date": "2017-06-11",
+  "inventors": ["Akihiro Yokoi"],
+  "original_assignee": "Bandai Co Ltd, Wiz KK",
+  "abstract": "A portable simulation device where players nurture digital creatures through responsive interaction. The device features mark-based controls for feeding, playing games, and disciplining the virtual creature in response to its calls. Multiple creatures with different appearances are stored and can evolve through growth stages based on player care quality. Two devices can connect to enable creature breeding, producing offspring that inherit personality traits from both parents.",
+  "gist": "The Tamagotchi patent: a handheld egg-shaped device for raising a virtual creature that calls for attention and grows through life stages depending on the quality of care. Two devices can connect to breed creatures whose offspring inherit traits from both parents.",
+  "fetched_at": "2026-08-26",
+  "source": "Google Patents via WebFetch"
+}
