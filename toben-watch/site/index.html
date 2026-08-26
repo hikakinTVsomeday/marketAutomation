@@ -1,0 +1,429 @@
+<title>答弁ウォッチ</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --paper: #F5F6F4;
+    --surface: #FFFFFF;
+    --ink: #20242B;
+    --ink-soft: #5A6270;
+    --rule: #D9DDDA;
+    --accent: #24518B;
+    --accent-ink: #24518B;
+    --accent-soft: #E5EBF3;
+    --good: #2C7A4B;
+    --good-soft: #E4F0E7;
+    --warn: #9A6A16;
+    --warn-soft: #F4EDDB;
+    --bad: #B23A2A;
+    --bad-soft: #F6E5E1;
+    --neutral-pill: #57616E;
+    --neutral-soft: #E8EAED;
+    --seal: #B23A2A;
+    --quote-bg: #EFF1EE;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #14171C;
+      --surface: #1C2129;
+      --ink: #E4E6E3;
+      --ink-soft: #9AA3AD;
+      --rule: #313843;
+      --accent: #7FA6D3;
+      --accent-ink: #A7C4E4;
+      --accent-soft: #223349;
+      --good: #6FBE8E;
+      --good-soft: #20352A;
+      --warn: #D3A555;
+      --warn-soft: #3A3123;
+      --bad: #D97A6A;
+      --bad-soft: #402724;
+      --neutral-pill: #A3ACB8;
+      --neutral-soft: #2A313B;
+      --seal: #D97A6A;
+      --quote-bg: #21262F;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #14171C;
+    --surface: #1C2129;
+    --ink: #E4E6E3;
+    --ink-soft: #9AA3AD;
+    --rule: #313843;
+    --accent: #7FA6D3;
+    --accent-ink: #A7C4E4;
+    --accent-soft: #223349;
+    --good: #6FBE8E;
+    --good-soft: #20352A;
+    --warn: #D3A555;
+    --warn-soft: #3A3123;
+    --bad: #D97A6A;
+    --bad-soft: #402724;
+    --neutral-pill: #A3ACB8;
+    --neutral-soft: #2A313B;
+    --seal: #D97A6A;
+    --quote-bg: #21262F;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    line-height: 1.85;
+    font-size: 15.5px;
+  }
+  .wrap { max-width: 800px; margin: 0 auto; padding: 0 22px 80px; }
+
+  a { color: var(--accent-ink); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px;
+  }
+
+  .mincho { font-family: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif; }
+  .mono { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+
+  /* ---- site header ---- */
+  header.site {
+    display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+    padding: 26px 0 14px;
+    border-bottom: 3px double var(--rule);
+  }
+  .site-name {
+    font-family: "Shippori Mincho", serif;
+    font-weight: 700; font-size: 1.5rem; letter-spacing: .12em; margin: 0;
+  }
+  .site-tag { color: var(--ink-soft); font-size: .82rem; letter-spacing: .04em; }
+  .proto {
+    margin-left: auto; font-size: .7rem; letter-spacing: .14em;
+    border: 1px solid var(--rule); color: var(--ink-soft);
+    padding: 2px 10px; border-radius: 999px; white-space: nowrap;
+  }
+
+  /* ---- case header ---- */
+  .case-head { padding: 40px 0 8px; }
+  .eyebrow {
+    font-size: .74rem; letter-spacing: .18em; color: var(--accent-ink);
+    text-transform: uppercase; margin-bottom: 10px;
+  }
+  h1.case-title {
+    font-family: "Shippori Mincho", serif;
+    font-weight: 600; font-size: clamp(1.45rem, 3.4vw, 1.95rem);
+    line-height: 1.5; margin: 0 0 22px; text-wrap: balance; letter-spacing: .02em;
+  }
+  .meta {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0; border-block: 1px solid var(--rule);
+  }
+  .meta > div { padding: 10px 14px 10px 0; }
+  .meta dt { font-size: .72rem; letter-spacing: .1em; color: var(--ink-soft); margin: 0 0 1px; }
+  .meta dd { margin: 0; font-size: .92rem; font-weight: 500; }
+  .src-links { margin-top: 12px; font-size: .82rem; color: var(--ink-soft); }
+  .src-links a { margin-right: 14px; }
+
+  /* ---- tldr ---- */
+  .tldr { margin: 40px 0 0; }
+  .sec-label {
+    display: flex; align-items: center; gap: 12px;
+    font-size: .8rem; letter-spacing: .22em; color: var(--ink-soft);
+    margin: 0 0 16px; font-weight: 700;
+  }
+  .sec-label::after { content: ""; flex: 1; border-top: 1px solid var(--rule); }
+  .tldr ol { margin: 0; padding: 0; list-style: none; counter-reset: n; display: grid; gap: 10px; }
+  .tldr li {
+    counter-increment: n; position: relative; padding-left: 40px;
+    font-size: .98rem; line-height: 1.8;
+  }
+  .tldr li::before {
+    content: counter(n);
+    position: absolute; left: 0; top: .3em;
+    width: 26px; height: 26px; display: grid; place-items: center;
+    font-family: "IBM Plex Mono", monospace; font-size: .8rem;
+    color: var(--accent-ink); border: 1px solid var(--accent);
+    border-radius: 50%;
+  }
+
+  /* ---- overall panel ---- */
+  .overall {
+    margin: 44px 0 0; background: var(--surface);
+    border: 1px solid var(--rule); border-radius: 6px;
+    padding: 26px 28px 22px;
+  }
+  .overall-top { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
+  .seal {
+    flex: 0 0 auto;
+    width: 84px; height: 84px;
+    border: 3px solid var(--seal); border-radius: 8px;
+    display: grid; place-items: center;
+    color: var(--seal);
+    font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 2.6rem;
+    position: relative; rotate: -2deg;
+  }
+  .seal small {
+    position: absolute; bottom: 4px; left: 0; right: 0;
+    font-size: .58rem; letter-spacing: .28em; font-weight: 600; text-align: center;
+  }
+  .overall-main { flex: 1 1 300px; }
+  .headline {
+    font-family: "Shippori Mincho", serif; font-weight: 600;
+    font-size: 1.16rem; line-height: 1.7; margin: 0 0 6px; text-wrap: balance;
+  }
+  .scoreline { color: var(--ink-soft); font-size: .85rem; }
+  .scoreline b { color: var(--ink); font-size: 1.05rem; }
+
+  .axes { margin-top: 20px; display: grid; gap: 9px; }
+  .axis { display: grid; grid-template-columns: 7.2em 1fr 2.6em; gap: 12px; align-items: center; }
+  .axis .name { font-size: .8rem; color: var(--ink-soft); }
+  .axis .bar { height: 7px; background: var(--neutral-soft); border-radius: 4px; overflow: hidden; }
+  .axis .bar i { display: block; height: 100%; background: var(--accent); border-radius: 4px; }
+  .axis .val { font-size: .8rem; text-align: right; }
+
+  .sw { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 22px; }
+  .sw h3 { font-size: .8rem; letter-spacing: .12em; margin: 0 0 8px; }
+  .sw .plus h3 { color: var(--good); }
+  .sw .minus h3 { color: var(--bad); }
+  .sw ul { margin: 0; padding-left: 1.2em; font-size: .88rem; color: var(--ink); display: grid; gap: 6px; }
+  .sw li::marker { color: var(--ink-soft); }
+
+  /* ---- glossary ---- */
+  .glossary { margin: 44px 0 0; }
+  .glossary dl { margin: 0; display: grid; gap: 14px; }
+  .glossary dt { font-weight: 700; font-size: .95rem; }
+  .glossary dt::before { content: "◆ "; color: var(--accent-ink); font-size: .8em; }
+  .glossary dd { margin: 2px 0 0 1.35em; font-size: .9rem; color: var(--ink); line-height: 1.8; }
+
+  /* ---- overview ---- */
+  .overview { margin: 44px 0 0; display: grid; gap: 20px; }
+  .overview p { margin: 0; font-size: .95rem; }
+  .ov-block h3 {
+    font-family: "Shippori Mincho", serif; font-size: 1rem; margin: 0 0 6px;
+  }
+
+  /* ---- items ---- */
+  .items { margin: 52px 0 0; display: grid; gap: 30px; }
+  .item {
+    background: var(--surface); border: 1px solid var(--rule);
+    border-radius: 6px; overflow: hidden;
+  }
+  .item-head {
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    padding: 14px 22px; border-bottom: 1px solid var(--rule);
+  }
+  .qnum {
+    font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 1.05rem;
+    letter-spacing: .1em;
+  }
+  .pill {
+    font-size: .74rem; font-weight: 700; letter-spacing: .08em;
+    padding: 3px 12px; border-radius: 999px; white-space: nowrap;
+  }
+  .pill.answered { background: var(--good-soft); color: var(--good); }
+  .pill.partial { background: var(--warn-soft); color: var(--warn); }
+  .pill.evaded { background: var(--bad-soft); color: var(--bad); }
+  .pill.refused_with_reason { background: var(--neutral-soft); color: var(--neutral-pill); }
+  .resp { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+  .resp .bar { width: 90px; height: 6px; background: var(--neutral-soft); border-radius: 3px; overflow: hidden; }
+  .resp .bar i { display: block; height: 100%; border-radius: 3px; }
+  .resp .num { font-size: .78rem; color: var(--ink-soft); }
+
+  .item-body { padding: 20px 22px 22px; display: grid; gap: 16px; }
+  .speech { display: grid; gap: 8px; }
+  .speech .who {
+    font-size: .72rem; letter-spacing: .16em; font-weight: 700; color: var(--ink-soft);
+  }
+  .speech .who.gov { color: var(--accent-ink); }
+  blockquote {
+    margin: 0; padding: 12px 16px;
+    background: var(--quote-bg); border-left: 3px solid var(--rule);
+    font-family: "Shippori Mincho", serif; font-size: .9rem; line-height: 1.9;
+    color: var(--ink); border-radius: 0 4px 4px 0;
+  }
+  .plain {
+    font-size: .95rem; padding-left: 16px; border-left: 3px solid var(--accent);
+  }
+  .plain b.lead { font-size: .78rem; letter-spacing: .1em; color: var(--accent-ink); display: block; }
+
+  .patterns { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-size: .74rem; letter-spacing: .04em;
+    border: 1px solid var(--bad); color: var(--bad);
+    padding: 2px 10px; border-radius: 3px;
+  }
+  .commentary { font-size: .92rem; color: var(--ink); }
+  .commentary b.lead { font-size: .76rem; letter-spacing: .14em; color: var(--ink-soft); display: block; margin-bottom: 2px; }
+  .goodpoint {
+    background: var(--good-soft); border-radius: 4px; padding: 12px 16px;
+    font-size: .9rem;
+  }
+  .goodpoint b.lead { color: var(--good); font-size: .76rem; letter-spacing: .14em; display: block; margin-bottom: 2px; }
+
+  /* ---- question quality / method ---- */
+  .qq, .method { margin: 44px 0 0; font-size: .92rem; }
+  .qq p, .method p { margin: 0 0 10px; }
+  .legend { margin: 14px 0 0; display: grid; gap: 6px; font-size: .85rem; }
+  .legend .row { display: grid; grid-template-columns: 9.5em 1fr; gap: 10px; }
+  .legend .code { color: var(--bad); font-weight: 700; font-size: .8rem; }
+
+  footer.site {
+    margin-top: 60px; padding-top: 18px; border-top: 3px double var(--rule);
+    font-size: .8rem; color: var(--ink-soft); line-height: 1.9;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .axis .bar i, .resp .bar i { transition: width .6s ease; }
+  }
+  @media (max-width: 560px) {
+    .resp { margin-left: 0; width: 100%; }
+    .axis { grid-template-columns: 6em 1fr 2.4em; }
+  }
+</style>
+
+<div class="wrap">
+  <header class="site">
+    <p class="site-name">答弁ウォッチ</p>
+    <span class="site-tag">国会答弁をAIが読み、評価する</span>
+    <span class="proto">PROTOTYPE</span>
+  </header>
+  <main id="app"></main>
+  <footer class="site" id="foot"></footer>
+</div>
+
+<script id="data" type="application/json">[{"id": "sangiin-214-014", "source": {"title": "予定納税制度の廃止又は見直しに関する質問主意書", "house_label": "参議院", "session": 214, "number": 14, "submitter": "浜田聡", "submitted_on": "令和6年10月4日", "answered_on": "令和6年10月18日", "answerer": "内閣総理大臣 石破茂", "note": "国会法第75条第2項により答弁延期（10月18日まで）", "urls": {"meisai": "https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/214/meisai/m214014.htm", "question": "https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/214/syuh/s214014.htm", "answer": "https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/214/touh/t214014.htm"}}, "topic_tags": ["税制", "所得税", "行政効率"], "glossary": [{"term": "予定納税", "definition": "前年の所得税が一定額（予定納税基準額15万円）以上だった個人が、その年の税金の一部を7月と11月に前払いする仕組み。前年並みの所得が続く前提で「前年の税額の3分の1ずつ」を先に納め、翌年の確定申告で精算する。所得が前年より大きく減った人は、払いすぎた分が後から還付される。"}, {"term": "質問主意書", "definition": "国会議員が内閣に対して文書で行う質問。内閣は原則7日以内に閣議決定を経た「答弁書」で回答する義務がある（国会法74・75条）。口頭の国会質疑と違い、政府の公式見解が文書で残る。"}, {"term": "予定申告制度", "definition": "予定納税の前身。1947年（昭和22年）に申告納税制度とともに導入され、1954年（昭和29年）に手続簡素化のため現在の予定納税制度に改められた。"}], "tldr": ["質問者は「予定納税は1954年に手続簡素化のために作られた制度で、所得が変動する人には非効率。もう役割を終えたのでは」と、制度の現在の存在意義を6点にわたって問うた。", "政府は統計（5年分の申告者数・還付者数）は具体的に開示した一方、制度の意義については77年前（1947年）の国会答弁を引用して「同様の見解」「変更等は検討していない」と回答した。", "「制度の事務コスト」の質問には『意味するところが明らかではない』という定型句で実質的に回答せず、6問中もっとも強い回避となった。"], "question_overview": "予定納税制度の導入経緯（1947年の予定申告制度→1954年に簡素化目的で予定納税制度へ）を一次資料（帝国議会・国会の議事録）付きで整理したうえで、「所得が前年と大きく変わる納税者にとって非効率で、還付の手間も生んでいる。導入時の『手続の簡素化』という目的はもう失われているのではないか」として、①導入時の政府見解の維持、②制度の目的と利点、③前年割れ・還付の統計、④制度の現在の評価、⑤事務コスト、⑥廃止・見直しの考え、の6点を質した。", "answer_overview": "6問を「一」「二・四・六」「三」「五」の4ブロックに再編して回答。統計（三）は5年分の数値を具体的に示したが、母数として質問の「所得税納税者総数」ではなく「確定申告書提出者数」を断りなく用い、法人・個人別の内訳は「膨大な作業を要する」として示さなかった。制度の意義（二・四・六）は1947年の大臣答弁の引用に依拠し、現在の環境を踏まえた理由の説明はないまま「意義がある」「変更等は検討していない」と結論。事務コスト（五）は「意味するところが明らかではない」として回答しなかった。", "items": [{"q_id": "一", "question_excerpt": "導入当時の政府答弁について、現在の政府においても見解は変わりないか。異なっている点があれば全て示されたい。", "question_plain": "1954年に予定納税制度を導入したときの政府説明（「手続を簡素化するため」等）を、今の政府もそのまま維持しているか？変わった点があれば全部挙げてほしい。", "answer_section": "一について", "answer_excerpt": "お尋ねについては、現時点においても、昭和二十九年二月一日の衆議院予算委員会における渡邊大蔵省主税局長（当時）の答弁及び同月三日の衆議院大蔵委員会における同局長（当時）の答弁と同様の見解である。", "answer_plain": "「今も当時の説明と同じ見解です（変わった点はありません）」と明言した。", "verdict": "answered", "verdict_label": "回答", "patterns": [], "responsiveness": 90, "commentary": "問いに正面から答えている。「異なっている点があれば全て示されたい」に対しては「同様の見解である」がそのまま「異なる点はない」という回答として成立しており、簡潔だが論理的に過不足はない。", "good_point": "Yes/No を曖昧にせず「同様の見解」と断言している。後の質疑で言質として使える明確な回答。"}, {"q_id": "二", "question_excerpt": "予定納税制度の目的と導入による利点を、その理由と併せて示されたい。", "question_plain": "この制度は何のためにあり、何が利点なのか。「理由も併せて」説明してほしい。", "answer_section": "二、四及び六について（一括答弁）", "answer_excerpt": "石橋大蔵大臣（当時）が…「所得を生ずる時期と納税の時期とが近接する…負擔の均衡適正…納税者の納税上の便宜…國庫收入の的確…」と述べており、予定納税制度のお尋ねの「目的」及び「導入による利点」についても同様であると考えている。", "answer_plain": "1947年（昭和22年）に前身の「予定申告制度」を作ったときの大臣答弁を引用し、「予定納税制度の目的・利点もこれと同じ」と回答。現在の視点からの理由説明はない。", "verdict": "partial", "verdict_label": "部分回答", "patterns": [{"code": "P4", "label": "過去答弁引用型"}, {"code": "P5", "label": "まとめ答弁型"}, {"code": "P8", "label": "論点スルー型"}], "responsiveness": 50, "commentary": "目的・利点そのものは（引用の形で）示したが、「その理由と併せて」という要求には応えていない。また質問者が示した経緯では、1954年の予定納税制度の導入目的は「手続の簡素化」（予定申告の形骸化を受けた合理化）だが、答弁は1947年の予定申告制度導入時の一般的な意義説明に差し替えており、77年前の説明が源泉徴収やe-Taxが普及した現在もなぜ妥当なのかには触れていない。", "good_point": null}, {"q_id": "三", "question_excerpt": "令和元年度から直近に至るまでにおける所得税納税者のうち、前年の所得を下回った納税者数、…還付を受けた納税者数、所得税納税者総数を年度ごと、かつ、法人及び個人ごとに示されたい。", "question_plain": "「前年より所得が減った人」「予定納税を払いすぎて還付された人」が実際どれくらいいるのか、直近5年分の数字を出してほしい（＝制度の非効率が実データでどの程度かを見たい）。", "answer_section": "三について", "answer_excerpt": "令和元年分…①約二千二百四万千人、②約六百九十一万四千人、③約三十五万八千人…（令和5年分まで5年分を提示）…「法人及び個人ごと」の実数については、これを把握しておらず、また、これを正確に算出するためには膨大な作業を要することから、お答えすることは困難である。", "answer_plain": "確定申告をした人の数・そのうち前年より所得が減った人の数・予定納税の払いすぎで還付された人の数を、5年分の実数で開示した。ただし母数は質問の「納税者総数」ではなく「確定申告書の提出者数」に置き換わっており、法人・個人別の内訳は「作業が膨大」として拒否した。", "verdict": "partial", "verdict_label": "部分回答", "patterns": [{"code": "P6", "label": "指標すり替え型"}, {"code": "P3", "label": "作業困難型"}], "responsiveness": 65, "commentary": "検証可能な統計を5年分開示した点は答弁書として実質的な情報提供であり評価できる（毎年35万〜49万人が予定納税の払いすぎで還付を受けている、という質問者の問題意識を裏づける数字でもある）。一方で、質問した「所得税納税者総数」は年末調整だけで納税が完結する給与所得者を含むため、断りなく「確定申告書提出者数」（約2,200万人）に差し替えたことで母数の意味が変わっている。なお「法人及び個人ごと」という質問側の要求は、予定納税が個人（所得税）のみの制度で法人には法人税の中間申告という別制度がある点で設計に難があり、政府はその旨を説明することもできたが、定型句での拒否を選んだ。", "good_point": "5年分の実数を①②③に整理して開示。答弁書で具体的な統計が示されるのは比較的誠実な対応で、第三者が検証・引用できる。"}, {"q_id": "四", "question_excerpt": "予定納税制度に対する政府の現在の評価を示されたい。", "question_plain": "この制度は今うまく機能していると評価しているのか？政府としての現在の評価を聞きたい。", "answer_section": "二、四及び六について（一括答弁）", "answer_excerpt": "政府としては、現時点においても、同制度はこのような目的に照らして意義があるものと考えており…", "answer_plain": "「今でも意義がある」という結論のみ。何を根拠にそう評価しているかの説明はない。", "verdict": "partial", "verdict_label": "部分回答", "patterns": [{"code": "P5", "label": "まとめ答弁型"}, {"code": "P8", "label": "論点スルー型"}], "responsiveness": 45, "commentary": "「評価を示せ」に対して結論（意義がある）は述べたが、評価の根拠が1947年の目的の引用のみで、自ら三で示した統計（毎年数十万人が払いすぎ→還付）との関係や、現在の徴税実務での位置づけには一切触れていない。評価と呼べる分析の実体がない。", "good_point": null}, {"q_id": "五", "question_excerpt": "予定納税制度に係る政府の事務コスト及び納税者の事務コストを実績又は推計で示されたい。", "question_plain": "この制度を回すのに行政側・納税者側でどれだけの手間・費用がかかっているのか。実績か推計で示してほしい（＝費用対効果を検証したい）。", "answer_section": "五について", "answer_excerpt": "お尋ねの「予定納税制度に係る政府の事務コスト及び納税者の事務コスト」の具体的に意味するところが明らかではなく、お尋ねについてお答えすることは困難である。", "answer_plain": "「質問の意味がよくわからないので答えられない」として、数字も推計も、把握していないという事実の説明すらしなかった。", "verdict": "evaded", "verdict_label": "実質回答なし", "patterns": [{"code": "P1", "label": "趣旨不明型"}], "responsiveness": 10, "commentary": "「行政コスト」「納税協力コスト」は税制の議論で一般的な概念であり、質問文は「実績又は推計で」と答え方の幅まで示している。趣旨が不明というより、少なくとも「制度単位のコストは把握・推計していない」と実態を答えることは可能だったはずで、6問中もっとも強い回避。廃止・見直しの是非を判断する材料（費用対効果）を求めた、質問の核心部分への不応答である点も重い。", "good_point": null}, {"q_id": "六", "question_excerpt": "手続の簡素化という目的はとうに喪失しているものと思料するが、予定納税制度を廃止又は見直す考えはあるか、政府の見解を示されたい。", "question_plain": "導入時の目的（手続の簡素化）はもう失われているのだから、廃止か見直しを検討しないのか？", "answer_section": "二、四及び六について（一括答弁）", "answer_excerpt": "…その変更等は検討していない。", "answer_plain": "「廃止も見直しも検討していない」と結論は明確に答えた。ただし「目的は喪失しているのでは」という質問者の論拠への反論・説明はない。", "verdict": "partial", "verdict_label": "部分回答", "patterns": [{"code": "P5", "label": "まとめ答弁型"}, {"code": "P8", "label": "論点スルー型"}], "responsiveness": 55, "commentary": "「検討していない」という政府の立場は明確で、この点は回答になっている。ただし、質問者が積み上げた「1954年導入の目的は手続の簡素化であり、それは既に失われた」という論証に対しては、反論も現状の正当化もなく、1947年の目的論の引用で受け流している。結論だけ明確で理由が空白、という答弁書の典型例。", "good_point": "「検討していない」と立場を曖昧にしなかった点は、後の追及の起点になる明確さがある。"}], "overall": {"score": 52, "grade": "C", "grade_scale": "A（誠実に回答）〜E（ほぼ回答拒否）の5段階", "headline": "数字は出したが、制度の存在意義は「77年前の答弁の引用」で受け流し", "axes": {"responsiveness": {"label": "回答充足度", "score": 50, "note": "6問中、正面回答1・部分回答4・実質回答なし1"}, "specificity": {"label": "具体性", "score": 55, "note": "統計は具体的、制度の意義は抽象的な引用のみ"}, "evidence": {"label": "根拠の提示", "score": 40, "note": "現在の視点からの根拠・分析がほぼない"}, "clarity": {"label": "明瞭さ", "score": 70, "note": "文章自体は読み取りやすく、立場（変更しない）は明確"}}, "strengths": ["問一に「同様の見解」と正面から答え、問六でも「変更等は検討していない」と立場を明示した", "問三で5年分の統計（申告者数・前年割れ・還付者数）を実数で開示した。これは質問者の問題意識（毎年数十万人が払いすぎ→還付）を裏づける検証可能なデータでもある"], "weaknesses": ["問五（事務コスト）を「意味するところが明らかではない」という定型句で処理し、把握状況の説明すらしなかった", "問三で母数を「納税者総数」から「確定申告書提出者数」へ断りなく差し替えた", "制度の意義の説明が1947年の大臣答弁の引用のみで、源泉徴収・e-Tax等が普及した現在も妥当とする理由を示していない（二・四・六を一括処理）"]}, "question_quality": {"score": 75, "comment": "導入経緯を帝国議会・国会の議事録という一次資料で裏づけ、統計要求も①〜③に特定できる形で設計されており、質問主意書として水準が高い。一方「法人及び個人ごと」の内訳要求は、予定納税が個人所得税のみの制度（法人は法人税の中間申告）である点で制度理解に難があり、政府に拒否の口実を与えた。"}, "analysis_note": "この解析は Claude（Anthropic）による試作評価です。評価は公開された質問・答弁の全文のみに基づき、提出者・政党への支持・不支持を意味しません。", "analyzed_at": "2026-08-26", "analyzer": "claude (prototype, hand-run)"}]</script>
+<script>
+  const CASES = JSON.parse(document.getElementById("data").textContent);
+  const esc = s => String(s ?? "").replace(/[&<>"']/g,
+    c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+  const VERDICT_COLOR = { answered: "var(--good)", partial: "var(--warn)",
+    evaded: "var(--bad)", refused_with_reason: "var(--neutral-pill)" };
+
+  const PATTERN_LEGEND = [
+    ["P1 趣旨不明型", "「お尋ねの趣旨が明らかではない」として答えない"],
+    ["P2 差し控え型", "「お答えを差し控えたい」として答えない"],
+    ["P3 作業困難型", "「膨大な作業を要する」等を理由に資料・数値を示さない"],
+    ["P4 過去答弁引用型", "過去の答弁の引用のみで、現在の説明・根拠を示さない"],
+    ["P5 まとめ答弁型", "複数の設問を一括りにして個別の論点への回答を薄める"],
+    ["P6 指標すり替え型", "問われた数値・定義と異なるものに断りなく置き換えて答える"],
+    ["P7 仮定不応答型", "「仮定の質問にはお答えできない」として答えない"],
+    ["P8 論点スルー型", "質問者の論拠・前提に反論も説明もせず結論だけ述べる"],
+  ];
+
+  function axisRow(a) {
+    return `<div class="axis">
+      <span class="name">${esc(a.label)}</span>
+      <span class="bar"><i style="width:${a.score}%"></i></span>
+      <span class="val mono">${a.score}</span>
+    </div>`;
+  }
+
+  function itemCard(it) {
+    const col = VERDICT_COLOR[it.verdict] || "var(--neutral-pill)";
+    return `<article class="item">
+      <div class="item-head">
+        <span class="qnum">問${esc(it.q_id)}</span>
+        <span class="pill ${esc(it.verdict)}">${esc(it.verdict_label)}</span>
+        ${it.patterns.map(p => `<span class="chip">${esc(p.label)}</span>`).join("")}
+        <span class="resp"><span class="bar"><i style="width:${it.responsiveness}%;background:${col}"></i></span>
+          <span class="num mono">${it.responsiveness}/100</span></span>
+      </div>
+      <div class="item-body">
+        <div class="speech">
+          <span class="who">質問（${esc(it.q_id)}）</span>
+          <blockquote>${esc(it.question_excerpt)}</blockquote>
+          <p class="plain"><b class="lead">なにを聞いている？</b>${esc(it.question_plain)}</p>
+        </div>
+        <div class="speech">
+          <span class="who gov">政府答弁（${esc(it.answer_section)}）</span>
+          <blockquote>${esc(it.answer_excerpt)}</blockquote>
+          <p class="plain"><b class="lead">どう答えた？</b>${esc(it.answer_plain)}</p>
+        </div>
+        <p class="commentary"><b class="lead">評価</b>${esc(it.commentary)}</p>
+        ${it.good_point ? `<p class="goodpoint"><b class="lead">誠実ハイライト</b>${esc(it.good_point)}</p>` : ""}
+      </div>
+    </article>`;
+  }
+
+  function render(c) {
+    const s = c.source, o = c.overall;
+    document.getElementById("app").innerHTML = `
+      <section class="case-head">
+        <p class="eyebrow">${esc(s.house_label)} 第${s.session}回国会 質問第${s.number}号</p>
+        <h1 class="case-title">${esc(s.title)}</h1>
+        <dl class="meta">
+          <div><dt>提出者</dt><dd>${esc(s.submitter)}</dd></div>
+          <div><dt>提出日</dt><dd>${esc(s.submitted_on)}</dd></div>
+          <div><dt>答弁書受領日</dt><dd>${esc(s.answered_on)}</dd></div>
+          <div><dt>分野</dt><dd>${(c.topic_tags || []).map(esc).join("・")}</dd></div>
+        </dl>
+        <p class="src-links">原文（参議院サイト）:
+          <a href="${esc(s.urls.question)}" target="_blank" rel="noopener">質問本文</a>
+          <a href="${esc(s.urls.answer)}" target="_blank" rel="noopener">答弁本文</a>
+          <a href="${esc(s.urls.meisai)}" target="_blank" rel="noopener">経過情報</a>
+        </p>
+      </section>
+
+      <section class="tldr">
+        <h2 class="sec-label">３行でわかる</h2>
+        <ol>${c.tldr.map(t => `<li>${esc(t)}</li>`).join("")}</ol>
+      </section>
+
+      <section class="overall">
+        <div class="overall-top">
+          <div class="seal" role="img" aria-label="総合評価 ${esc(o.grade)}">${esc(o.grade)}<small>総合評価</small></div>
+          <div class="overall-main">
+            <p class="headline">${esc(o.headline)}</p>
+            <p class="scoreline">誠実度スコア <b class="mono">${o.score}</b> / 100　（${esc(o.grade_scale)}）</p>
+          </div>
+        </div>
+        <div class="axes">
+          ${["responsiveness","specificity","evidence","clarity"].map(k => axisRow(o.axes[k])).join("")}
+        </div>
+        <div class="sw">
+          <div class="plus"><h3>誠実だった点</h3><ul>${o.strengths.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
+          <div class="minus"><h3>問題のある点</h3><ul>${o.weaknesses.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
+        </div>
+      </section>
+
+      <section class="glossary">
+        <h2 class="sec-label">まず用語から</h2>
+        <dl>${c.glossary.map(g => `<div><dt>${esc(g.term)}</dt><dd>${esc(g.definition)}</dd></div>`).join("")}</dl>
+      </section>
+
+      <section class="overview">
+        <h2 class="sec-label">今回のやりとり</h2>
+        <div class="ov-block"><h3>質問者は何を問うたか</h3><p>${esc(c.question_overview)}</p></div>
+        <div class="ov-block"><h3>政府はどう答えたか</h3><p>${esc(c.answer_overview)}</p></div>
+      </section>
+
+      <section>
+        <div class="items">
+          <h2 class="sec-label" style="margin:0">逐条評価 — ６つの設問と答弁</h2>
+          ${c.items.map(itemCard).join("")}
+        </div>
+      </section>
+
+      <section class="qq">
+        <h2 class="sec-label">質問の質について</h2>
+        <p>${esc(c.question_quality.comment)}（設計評価: <span class="mono">${c.question_quality.score}</span>/100）</p>
+      </section>
+
+      <section class="method">
+        <h2 class="sec-label">評価の方法と限界</h2>
+        <p>評価対象は「答弁が質問に実質的に答えているか」のみで、政策の当否や政治的立場は評価しません。
+        判定は公開された質問・答弁の全文に基づき、AI（Claude）が逐条で行っています。
+        回避パターンは次の分類を用いています。</p>
+        <div class="legend">
+          ${PATTERN_LEGEND.map(([code, txt]) =>
+            `<div class="row"><span class="code">${esc(code)}</span><span>${esc(txt)}</span></div>`).join("")}
+        </div>
+      </section>`;
+
+    document.getElementById("foot").innerHTML =
+      `${esc(c.analysis_note)}<br>
+       出典: 参議院「質問主意書」（<a href="${esc(s.urls.meisai)}" target="_blank" rel="noopener">第${s.session}回国会 質問第${s.number}号</a>）／解析日: ${esc(c.analyzed_at)}`;
+  }
+
+  render(CASES[0]);
+</script>

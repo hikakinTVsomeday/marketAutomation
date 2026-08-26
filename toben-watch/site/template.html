@@ -1,0 +1,429 @@
+<title>答弁ウォッチ</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --paper: #F5F6F4;
+    --surface: #FFFFFF;
+    --ink: #20242B;
+    --ink-soft: #5A6270;
+    --rule: #D9DDDA;
+    --accent: #24518B;
+    --accent-ink: #24518B;
+    --accent-soft: #E5EBF3;
+    --good: #2C7A4B;
+    --good-soft: #E4F0E7;
+    --warn: #9A6A16;
+    --warn-soft: #F4EDDB;
+    --bad: #B23A2A;
+    --bad-soft: #F6E5E1;
+    --neutral-pill: #57616E;
+    --neutral-soft: #E8EAED;
+    --seal: #B23A2A;
+    --quote-bg: #EFF1EE;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #14171C;
+      --surface: #1C2129;
+      --ink: #E4E6E3;
+      --ink-soft: #9AA3AD;
+      --rule: #313843;
+      --accent: #7FA6D3;
+      --accent-ink: #A7C4E4;
+      --accent-soft: #223349;
+      --good: #6FBE8E;
+      --good-soft: #20352A;
+      --warn: #D3A555;
+      --warn-soft: #3A3123;
+      --bad: #D97A6A;
+      --bad-soft: #402724;
+      --neutral-pill: #A3ACB8;
+      --neutral-soft: #2A313B;
+      --seal: #D97A6A;
+      --quote-bg: #21262F;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #14171C;
+    --surface: #1C2129;
+    --ink: #E4E6E3;
+    --ink-soft: #9AA3AD;
+    --rule: #313843;
+    --accent: #7FA6D3;
+    --accent-ink: #A7C4E4;
+    --accent-soft: #223349;
+    --good: #6FBE8E;
+    --good-soft: #20352A;
+    --warn: #D3A555;
+    --warn-soft: #3A3123;
+    --bad: #D97A6A;
+    --bad-soft: #402724;
+    --neutral-pill: #A3ACB8;
+    --neutral-soft: #2A313B;
+    --seal: #D97A6A;
+    --quote-bg: #21262F;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    line-height: 1.85;
+    font-size: 15.5px;
+  }
+  .wrap { max-width: 800px; margin: 0 auto; padding: 0 22px 80px; }
+
+  a { color: var(--accent-ink); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px;
+  }
+
+  .mincho { font-family: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif; }
+  .mono { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+
+  /* ---- site header ---- */
+  header.site {
+    display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+    padding: 26px 0 14px;
+    border-bottom: 3px double var(--rule);
+  }
+  .site-name {
+    font-family: "Shippori Mincho", serif;
+    font-weight: 700; font-size: 1.5rem; letter-spacing: .12em; margin: 0;
+  }
+  .site-tag { color: var(--ink-soft); font-size: .82rem; letter-spacing: .04em; }
+  .proto {
+    margin-left: auto; font-size: .7rem; letter-spacing: .14em;
+    border: 1px solid var(--rule); color: var(--ink-soft);
+    padding: 2px 10px; border-radius: 999px; white-space: nowrap;
+  }
+
+  /* ---- case header ---- */
+  .case-head { padding: 40px 0 8px; }
+  .eyebrow {
+    font-size: .74rem; letter-spacing: .18em; color: var(--accent-ink);
+    text-transform: uppercase; margin-bottom: 10px;
+  }
+  h1.case-title {
+    font-family: "Shippori Mincho", serif;
+    font-weight: 600; font-size: clamp(1.45rem, 3.4vw, 1.95rem);
+    line-height: 1.5; margin: 0 0 22px; text-wrap: balance; letter-spacing: .02em;
+  }
+  .meta {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0; border-block: 1px solid var(--rule);
+  }
+  .meta > div { padding: 10px 14px 10px 0; }
+  .meta dt { font-size: .72rem; letter-spacing: .1em; color: var(--ink-soft); margin: 0 0 1px; }
+  .meta dd { margin: 0; font-size: .92rem; font-weight: 500; }
+  .src-links { margin-top: 12px; font-size: .82rem; color: var(--ink-soft); }
+  .src-links a { margin-right: 14px; }
+
+  /* ---- tldr ---- */
+  .tldr { margin: 40px 0 0; }
+  .sec-label {
+    display: flex; align-items: center; gap: 12px;
+    font-size: .8rem; letter-spacing: .22em; color: var(--ink-soft);
+    margin: 0 0 16px; font-weight: 700;
+  }
+  .sec-label::after { content: ""; flex: 1; border-top: 1px solid var(--rule); }
+  .tldr ol { margin: 0; padding: 0; list-style: none; counter-reset: n; display: grid; gap: 10px; }
+  .tldr li {
+    counter-increment: n; position: relative; padding-left: 40px;
+    font-size: .98rem; line-height: 1.8;
+  }
+  .tldr li::before {
+    content: counter(n);
+    position: absolute; left: 0; top: .3em;
+    width: 26px; height: 26px; display: grid; place-items: center;
+    font-family: "IBM Plex Mono", monospace; font-size: .8rem;
+    color: var(--accent-ink); border: 1px solid var(--accent);
+    border-radius: 50%;
+  }
+
+  /* ---- overall panel ---- */
+  .overall {
+    margin: 44px 0 0; background: var(--surface);
+    border: 1px solid var(--rule); border-radius: 6px;
+    padding: 26px 28px 22px;
+  }
+  .overall-top { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
+  .seal {
+    flex: 0 0 auto;
+    width: 84px; height: 84px;
+    border: 3px solid var(--seal); border-radius: 8px;
+    display: grid; place-items: center;
+    color: var(--seal);
+    font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 2.6rem;
+    position: relative; rotate: -2deg;
+  }
+  .seal small {
+    position: absolute; bottom: 4px; left: 0; right: 0;
+    font-size: .58rem; letter-spacing: .28em; font-weight: 600; text-align: center;
+  }
+  .overall-main { flex: 1 1 300px; }
+  .headline {
+    font-family: "Shippori Mincho", serif; font-weight: 600;
+    font-size: 1.16rem; line-height: 1.7; margin: 0 0 6px; text-wrap: balance;
+  }
+  .scoreline { color: var(--ink-soft); font-size: .85rem; }
+  .scoreline b { color: var(--ink); font-size: 1.05rem; }
+
+  .axes { margin-top: 20px; display: grid; gap: 9px; }
+  .axis { display: grid; grid-template-columns: 7.2em 1fr 2.6em; gap: 12px; align-items: center; }
+  .axis .name { font-size: .8rem; color: var(--ink-soft); }
+  .axis .bar { height: 7px; background: var(--neutral-soft); border-radius: 4px; overflow: hidden; }
+  .axis .bar i { display: block; height: 100%; background: var(--accent); border-radius: 4px; }
+  .axis .val { font-size: .8rem; text-align: right; }
+
+  .sw { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 22px; }
+  .sw h3 { font-size: .8rem; letter-spacing: .12em; margin: 0 0 8px; }
+  .sw .plus h3 { color: var(--good); }
+  .sw .minus h3 { color: var(--bad); }
+  .sw ul { margin: 0; padding-left: 1.2em; font-size: .88rem; color: var(--ink); display: grid; gap: 6px; }
+  .sw li::marker { color: var(--ink-soft); }
+
+  /* ---- glossary ---- */
+  .glossary { margin: 44px 0 0; }
+  .glossary dl { margin: 0; display: grid; gap: 14px; }
+  .glossary dt { font-weight: 700; font-size: .95rem; }
+  .glossary dt::before { content: "◆ "; color: var(--accent-ink); font-size: .8em; }
+  .glossary dd { margin: 2px 0 0 1.35em; font-size: .9rem; color: var(--ink); line-height: 1.8; }
+
+  /* ---- overview ---- */
+  .overview { margin: 44px 0 0; display: grid; gap: 20px; }
+  .overview p { margin: 0; font-size: .95rem; }
+  .ov-block h3 {
+    font-family: "Shippori Mincho", serif; font-size: 1rem; margin: 0 0 6px;
+  }
+
+  /* ---- items ---- */
+  .items { margin: 52px 0 0; display: grid; gap: 30px; }
+  .item {
+    background: var(--surface); border: 1px solid var(--rule);
+    border-radius: 6px; overflow: hidden;
+  }
+  .item-head {
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    padding: 14px 22px; border-bottom: 1px solid var(--rule);
+  }
+  .qnum {
+    font-family: "Shippori Mincho", serif; font-weight: 700; font-size: 1.05rem;
+    letter-spacing: .1em;
+  }
+  .pill {
+    font-size: .74rem; font-weight: 700; letter-spacing: .08em;
+    padding: 3px 12px; border-radius: 999px; white-space: nowrap;
+  }
+  .pill.answered { background: var(--good-soft); color: var(--good); }
+  .pill.partial { background: var(--warn-soft); color: var(--warn); }
+  .pill.evaded { background: var(--bad-soft); color: var(--bad); }
+  .pill.refused_with_reason { background: var(--neutral-soft); color: var(--neutral-pill); }
+  .resp { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+  .resp .bar { width: 90px; height: 6px; background: var(--neutral-soft); border-radius: 3px; overflow: hidden; }
+  .resp .bar i { display: block; height: 100%; border-radius: 3px; }
+  .resp .num { font-size: .78rem; color: var(--ink-soft); }
+
+  .item-body { padding: 20px 22px 22px; display: grid; gap: 16px; }
+  .speech { display: grid; gap: 8px; }
+  .speech .who {
+    font-size: .72rem; letter-spacing: .16em; font-weight: 700; color: var(--ink-soft);
+  }
+  .speech .who.gov { color: var(--accent-ink); }
+  blockquote {
+    margin: 0; padding: 12px 16px;
+    background: var(--quote-bg); border-left: 3px solid var(--rule);
+    font-family: "Shippori Mincho", serif; font-size: .9rem; line-height: 1.9;
+    color: var(--ink); border-radius: 0 4px 4px 0;
+  }
+  .plain {
+    font-size: .95rem; padding-left: 16px; border-left: 3px solid var(--accent);
+  }
+  .plain b.lead { font-size: .78rem; letter-spacing: .1em; color: var(--accent-ink); display: block; }
+
+  .patterns { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-size: .74rem; letter-spacing: .04em;
+    border: 1px solid var(--bad); color: var(--bad);
+    padding: 2px 10px; border-radius: 3px;
+  }
+  .commentary { font-size: .92rem; color: var(--ink); }
+  .commentary b.lead { font-size: .76rem; letter-spacing: .14em; color: var(--ink-soft); display: block; margin-bottom: 2px; }
+  .goodpoint {
+    background: var(--good-soft); border-radius: 4px; padding: 12px 16px;
+    font-size: .9rem;
+  }
+  .goodpoint b.lead { color: var(--good); font-size: .76rem; letter-spacing: .14em; display: block; margin-bottom: 2px; }
+
+  /* ---- question quality / method ---- */
+  .qq, .method { margin: 44px 0 0; font-size: .92rem; }
+  .qq p, .method p { margin: 0 0 10px; }
+  .legend { margin: 14px 0 0; display: grid; gap: 6px; font-size: .85rem; }
+  .legend .row { display: grid; grid-template-columns: 9.5em 1fr; gap: 10px; }
+  .legend .code { color: var(--bad); font-weight: 700; font-size: .8rem; }
+
+  footer.site {
+    margin-top: 60px; padding-top: 18px; border-top: 3px double var(--rule);
+    font-size: .8rem; color: var(--ink-soft); line-height: 1.9;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .axis .bar i, .resp .bar i { transition: width .6s ease; }
+  }
+  @media (max-width: 560px) {
+    .resp { margin-left: 0; width: 100%; }
+    .axis { grid-template-columns: 6em 1fr 2.4em; }
+  }
+</style>
+
+<div class="wrap">
+  <header class="site">
+    <p class="site-name">答弁ウォッチ</p>
+    <span class="site-tag">国会答弁をAIが読み、評価する</span>
+    <span class="proto">PROTOTYPE</span>
+  </header>
+  <main id="app"></main>
+  <footer class="site" id="foot"></footer>
+</div>
+
+<script id="data" type="application/json">__DATA__</script>
+<script>
+  const CASES = JSON.parse(document.getElementById("data").textContent);
+  const esc = s => String(s ?? "").replace(/[&<>"']/g,
+    c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+  const VERDICT_COLOR = { answered: "var(--good)", partial: "var(--warn)",
+    evaded: "var(--bad)", refused_with_reason: "var(--neutral-pill)" };
+
+  const PATTERN_LEGEND = [
+    ["P1 趣旨不明型", "「お尋ねの趣旨が明らかではない」として答えない"],
+    ["P2 差し控え型", "「お答えを差し控えたい」として答えない"],
+    ["P3 作業困難型", "「膨大な作業を要する」等を理由に資料・数値を示さない"],
+    ["P4 過去答弁引用型", "過去の答弁の引用のみで、現在の説明・根拠を示さない"],
+    ["P5 まとめ答弁型", "複数の設問を一括りにして個別の論点への回答を薄める"],
+    ["P6 指標すり替え型", "問われた数値・定義と異なるものに断りなく置き換えて答える"],
+    ["P7 仮定不応答型", "「仮定の質問にはお答えできない」として答えない"],
+    ["P8 論点スルー型", "質問者の論拠・前提に反論も説明もせず結論だけ述べる"],
+  ];
+
+  function axisRow(a) {
+    return `<div class="axis">
+      <span class="name">${esc(a.label)}</span>
+      <span class="bar"><i style="width:${a.score}%"></i></span>
+      <span class="val mono">${a.score}</span>
+    </div>`;
+  }
+
+  function itemCard(it) {
+    const col = VERDICT_COLOR[it.verdict] || "var(--neutral-pill)";
+    return `<article class="item">
+      <div class="item-head">
+        <span class="qnum">問${esc(it.q_id)}</span>
+        <span class="pill ${esc(it.verdict)}">${esc(it.verdict_label)}</span>
+        ${it.patterns.map(p => `<span class="chip">${esc(p.label)}</span>`).join("")}
+        <span class="resp"><span class="bar"><i style="width:${it.responsiveness}%;background:${col}"></i></span>
+          <span class="num mono">${it.responsiveness}/100</span></span>
+      </div>
+      <div class="item-body">
+        <div class="speech">
+          <span class="who">質問（${esc(it.q_id)}）</span>
+          <blockquote>${esc(it.question_excerpt)}</blockquote>
+          <p class="plain"><b class="lead">なにを聞いている？</b>${esc(it.question_plain)}</p>
+        </div>
+        <div class="speech">
+          <span class="who gov">政府答弁（${esc(it.answer_section)}）</span>
+          <blockquote>${esc(it.answer_excerpt)}</blockquote>
+          <p class="plain"><b class="lead">どう答えた？</b>${esc(it.answer_plain)}</p>
+        </div>
+        <p class="commentary"><b class="lead">評価</b>${esc(it.commentary)}</p>
+        ${it.good_point ? `<p class="goodpoint"><b class="lead">誠実ハイライト</b>${esc(it.good_point)}</p>` : ""}
+      </div>
+    </article>`;
+  }
+
+  function render(c) {
+    const s = c.source, o = c.overall;
+    document.getElementById("app").innerHTML = `
+      <section class="case-head">
+        <p class="eyebrow">${esc(s.house_label)} 第${s.session}回国会 質問第${s.number}号</p>
+        <h1 class="case-title">${esc(s.title)}</h1>
+        <dl class="meta">
+          <div><dt>提出者</dt><dd>${esc(s.submitter)}</dd></div>
+          <div><dt>提出日</dt><dd>${esc(s.submitted_on)}</dd></div>
+          <div><dt>答弁書受領日</dt><dd>${esc(s.answered_on)}</dd></div>
+          <div><dt>分野</dt><dd>${(c.topic_tags || []).map(esc).join("・")}</dd></div>
+        </dl>
+        <p class="src-links">原文（参議院サイト）:
+          <a href="${esc(s.urls.question)}" target="_blank" rel="noopener">質問本文</a>
+          <a href="${esc(s.urls.answer)}" target="_blank" rel="noopener">答弁本文</a>
+          <a href="${esc(s.urls.meisai)}" target="_blank" rel="noopener">経過情報</a>
+        </p>
+      </section>
+
+      <section class="tldr">
+        <h2 class="sec-label">３行でわかる</h2>
+        <ol>${c.tldr.map(t => `<li>${esc(t)}</li>`).join("")}</ol>
+      </section>
+
+      <section class="overall">
+        <div class="overall-top">
+          <div class="seal" role="img" aria-label="総合評価 ${esc(o.grade)}">${esc(o.grade)}<small>総合評価</small></div>
+          <div class="overall-main">
+            <p class="headline">${esc(o.headline)}</p>
+            <p class="scoreline">誠実度スコア <b class="mono">${o.score}</b> / 100　（${esc(o.grade_scale)}）</p>
+          </div>
+        </div>
+        <div class="axes">
+          ${["responsiveness","specificity","evidence","clarity"].map(k => axisRow(o.axes[k])).join("")}
+        </div>
+        <div class="sw">
+          <div class="plus"><h3>誠実だった点</h3><ul>${o.strengths.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
+          <div class="minus"><h3>問題のある点</h3><ul>${o.weaknesses.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
+        </div>
+      </section>
+
+      <section class="glossary">
+        <h2 class="sec-label">まず用語から</h2>
+        <dl>${c.glossary.map(g => `<div><dt>${esc(g.term)}</dt><dd>${esc(g.definition)}</dd></div>`).join("")}</dl>
+      </section>
+
+      <section class="overview">
+        <h2 class="sec-label">今回のやりとり</h2>
+        <div class="ov-block"><h3>質問者は何を問うたか</h3><p>${esc(c.question_overview)}</p></div>
+        <div class="ov-block"><h3>政府はどう答えたか</h3><p>${esc(c.answer_overview)}</p></div>
+      </section>
+
+      <section>
+        <div class="items">
+          <h2 class="sec-label" style="margin:0">逐条評価 — ６つの設問と答弁</h2>
+          ${c.items.map(itemCard).join("")}
+        </div>
+      </section>
+
+      <section class="qq">
+        <h2 class="sec-label">質問の質について</h2>
+        <p>${esc(c.question_quality.comment)}（設計評価: <span class="mono">${c.question_quality.score}</span>/100）</p>
+      </section>
+
+      <section class="method">
+        <h2 class="sec-label">評価の方法と限界</h2>
+        <p>評価対象は「答弁が質問に実質的に答えているか」のみで、政策の当否や政治的立場は評価しません。
+        判定は公開された質問・答弁の全文に基づき、AI（Claude）が逐条で行っています。
+        回避パターンは次の分類を用いています。</p>
+        <div class="legend">
+          ${PATTERN_LEGEND.map(([code, txt]) =>
+            `<div class="row"><span class="code">${esc(code)}</span><span>${esc(txt)}</span></div>`).join("")}
+        </div>
+      </section>`;
+
+    document.getElementById("foot").innerHTML =
+      `${esc(c.analysis_note)}<br>
+       出典: 参議院「質問主意書」（<a href="${esc(s.urls.meisai)}" target="_blank" rel="noopener">第${s.session}回国会 質問第${s.number}号</a>）／解析日: ${esc(c.analyzed_at)}`;
+  }
+
+  render(CASES[0]);
+</script>
