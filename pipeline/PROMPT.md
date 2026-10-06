@@ -46,7 +46,7 @@ Claude Code のセッションで「US1234567 を追加して」と頼めば、�
 }
 ```
 
-category は現在 `tech / commerce / food / pet / mobility / hardware / goods / toy` を使用中（新設可）。
+category は現在 `tech / commerce / food / pet / mobility / hardware / goods / toy / material` を使用中（新設可）。
 
 ## 切れたてカレンダー（data/upcoming/）
 

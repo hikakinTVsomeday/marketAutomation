@@ -6,6 +6,6 @@
   "title_ja": "Keurigの湯量制御システム",
   "original_assignee": "Keurig Inc",
   "expected_expiration": "2026-09-06",
-  "status_checked": "Active（2026-08-25 に Google Patents で確認）",
+  "status_checked": "予定日を過ぎたが Google Patents の表示はまだ Active（2026-10-06 確認）。表示の反映待ちか、期間に変動があった可能性。確認が取れるまで本収録しない",
   "why_hot": "1杯抽出コーヒーマシンの心臓部「決まった量の湯を正確に送る」仕組み。失効すれば互換マシンや自作抽出キットの設計自由度が一段上がる。"
 }

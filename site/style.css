@@ -256,6 +256,13 @@ body {
   color: var(--text-sub);
 }
 
+.up-body .up-note {
+  font-size: 0.76rem;
+  color: var(--stamp);
+}
+
+.up-days.up-free { white-space: normal; }
+
 @media (max-width: 640px) {
   .up-row { flex-wrap: wrap; gap: 6px 14px; }
 }
